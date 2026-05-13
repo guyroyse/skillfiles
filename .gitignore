@@ -1,0 +1,7 @@
+# OS bits
+.DS_Store
+Thumbs.db
+
+# IDE bits
+.vscode/
+.claude/
