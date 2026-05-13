@@ -1,6 +1,6 @@
 ---
 name: guys-typescript-style
-description: Guy's personal TypeScript coding style — naming conventions, module structure, type-system idioms, class conventions, and small syntactic preferences. Use this skill whenever generating, writing, or editing TypeScript code (.ts/.tsx) for Guy, even if he doesn't explicitly mention style. This includes new files, edits to existing files, code reviews where you'd suggest replacement code, and any TypeScript snippet shown in conversation. The goal: produce TypeScript that looks like Guy wrote it himself.
+description: Guy's personal TypeScript coding style — naming conventions, module structure, type-system idioms, class conventions, and small syntactic preferences. Use this skill whenever generating, writing, or editing TypeScript code (.ts/.tsx) for Guy, even if he doesn't explicitly mention style. This includes new files, edits to existing files, code reviews where you'd suggest replacement code, and any TypeScript snippet shown in conversation. The goal is to produce TypeScript that looks like Guy wrote it himself.
 ---
 
 # Guy's TypeScript Style
