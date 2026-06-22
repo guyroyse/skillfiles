@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "guys-skills",
+  "description": "Guy Royse's personal collection of Claude Code skills",
+  "owner": {
+    "name": "Guy Royse",
+    "email": "guy@guy.dev"
+  },
+  "plugins": [
+    {
+      "name": "ttrpg-tools",
+      "description": "Generate creative and unique TTRPG campaign ideas by combining random player types, plots, villains, and settings.",
+      "source": "./",
+      "skills": ["./skills/ttrpg-tools"],
+      "strict": false,
+      "category": "productivity",
+      "author": {
+        "name": "Guy Royse"
+      },
+      "homepage": "https://github.com/guy-royse/skillfiles"
+    },
+    {
+      "name": "be-like-guy",
+      "description": "Write like Guy, code like Guy, and use Obsidian like Guy — a collection of Guy Royse's personal style skills.",
+      "source": "./",
+      "skills": ["./skills/be-like-guy"],
+      "strict": false,
+      "category": "productivity",
+      "author": {
+        "name": "Guy Royse"
+      },
+      "homepage": "https://github.com/guy-royse/skillfiles"
+    }
+  ]
+}

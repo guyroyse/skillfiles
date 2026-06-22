@@ -1,57 +1,118 @@
 # Skillfiles
 
-My personal collection of skills. Built on the [Agent Skills](https://agentskills.io/) open spec, of course. Installable into Claude, Codex, Cursor, Gemini, Copilot, and all sorts of other compatible tools.
+My personal collection of skills. Built on the [Agent Skills](https://agentskills.io/) open spec, so they work with Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot, and most other AI coding tools.
 
 ## Skills
 
-- **[guys-typescript-style](skills/guys-typescript-style)**: My TypeScript coding style including naming conventions, module structure, type-system idioms, class conventions, and syntactic preferences.
+### TTRPG Tools
+
+Skills for tabletop role-playing game enthusiasts.
+
+- **[ttrpg-campaign-generator](skills/ttrpg-tools/ttrpg-campaign-generator)**:
+  Generates creative campaign ideas by randomly combining player types, plot
+  structures, villain archetypes, and settings inspired by famous books,
+  movies, and shows.
+
+### Be Like Guy
+
+Skills that encode my personal style for writing and coding.
+
+- **[code-typescript-like-guy](skills/be-like-guy/code-typescript-like-guy)**:
+  My TypeScript coding style — naming conventions, module structure,
+  type-system idioms, class conventions, and syntactic preferences.
+- **[write-like-guy](skills/be-like-guy/write-like-guy)**: Writes social media
+  posts and short promotional copy in my voice — plainspoken and casual with
+  precise technical authority.
+- **[use-obsidian-like-guy](skills/be-like-guy/use-obsidian-like-guy)**:
+  Operates within my Obsidian vault (Datacore) — reading, writing, routing,
+  and maintaining notes the way I like them.
 
 ## Installation
 
-I recommend installing with the [GitHub CLI](https://cli.github.com/).
+Skills can be installed using the GitHub CLI, the `npx skills` CLI, or the
+Claude Code plugin marketplace. Pick whichever you have handy.
 
-Install all the skills for all the tools:
+### GitHub CLI (`gh skill`)
+
+Install everything:
 
 ```sh
 gh skill install guyroyse/skillfiles
 ```
 
-Install a specific skill for a single tool:
+Install a specific skill:
 
 ```sh
-gh skill install guyroyse/skillfiles guys-typescript-style --agent claude-code --scope user
+gh skill install guyroyse/skillfiles ttrpg-campaign-generator --agent claude-code --scope user
 ```
 
-To preview before installing a skill to check for malware. There isn't any but why should you trust me?
+Preview before installing (always a good idea):
 
 ```sh
 gh skill preview guyroyse/skillfiles
 ```
 
-### Make sure the skill actually triggers
+### npx skills
 
-Agents tend to ignore personal-style skills as they just assume they can handle code generation on their own. This is annoying. To force the issue, add a line to your agent-instructions file (i.e. `AGENTS.md` or `CLAUDE.md`) telling the agent to apply the skill on TypeScript work.
+Install everything:
 
-It doesn't need to be fancy. This will do:
-
-```markdown
-When generating or editing TypeScript, apply the guys-typescript-style skill.
+```sh
+npx skills add guyroyse/skillfiles
 ```
 
-The location of your agent-instruction file can vary depending on the tool you use and the scope you want:
+Install a specific skill:
 
-**Project-level**
+```sh
+npx skills add guyroyse/skillfiles --skill ttrpg-campaign-generator
+```
 
-Drop `AGENTS.md` at the repo root. This is probably the easiest as most tools read these automatically. I also like to import the `AGENTS.md` into `CLAUDE.md` so that it just works with Claude Code as well. See the [`CLAUDE.md`](CLAUDE.md) file in this repo for how to do that.
+### Claude Code Plugin Marketplace
 
-**User-global**
+Add the marketplace, then install one or both plugins:
 
-As of the time of this commit, this tends to be tool-specific and not all tools support it. But this is a handy option so you don't have to constantly tell each project how to write your code.
+```sh
+claude plugin marketplace add guyroyse/skillfiles
+claude plugin install ttrpg-tools@guys-skills
+claude plugin install be-like-guy@guys-skills
+```
 
-Some common file locations according to AI:
+Or from inside Claude Code:
+
+```
+/plugin marketplace add guyroyse/skillfiles
+/plugin install ttrpg-tools@guys-skills
+/plugin install be-like-guy@guys-skills
+```
+
+Skills installed via the plugin marketplace are namespaced, so you invoke them
+as `/ttrpg-tools:ttrpg-campaign-generator` and `/be-like-guy:write-like-guy`.
+
+
+## Making Skills Trigger Automatically
+
+Agents tend to ignore personal-style skills and assume they can handle things
+on their own. To force the issue, add a line to your agent-instructions file
+(`AGENTS.md`, `CLAUDE.md`, etc.) telling the agent when to apply the skill.
+
+It doesn't need to be fancy:
+
+```markdown
+When generating or editing TypeScript, apply the code-typescript-like-guy
+skill.
+```
+
+The location of your agent-instructions file varies by tool and scope:
+
+**Project-level** — drop `AGENTS.md` at the repo root. Most tools pick this
+up automatically. For Claude Code, you can import it from `CLAUDE.md` with
+`@AGENTS.md`.
+
+**User-global** — handy so you don't have to configure every project
+separately. Common locations:
 
 - Claude Code: `~/.claude/CLAUDE.md`
 - Codex: `~/.codex/AGENTS.md`
 - Gemini CLI: `~/.gemini/GEMINI.md`
 
-Cursor and GitHub Copilot don't have global files to edit so use project-level files instead.
+Cursor and GitHub Copilot don't have global instruction files — use
+project-level files for those.
