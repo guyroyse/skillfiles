@@ -1,6 +1,6 @@
 # Skillfiles
 
-My personal collection of agent skills, mostly for coding. Built on the [Agent Skills](https://agentskills.io/) open spec, of course. Installable into Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot, and other compatible tools.
+My personal collection of skills. Built on the [Agent Skills](https://agentskills.io/) open spec, of course. Installable into Claude, Codex, Cursor, Gemini, Copilot, and all sorts of other compatible tools.
 
 ## Skills
 

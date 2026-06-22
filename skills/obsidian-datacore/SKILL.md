@@ -1,5 +1,5 @@
 ---
-name: datacore
+name: obsidian-datacore
 description: Use this skill whenever you are operating within Guy's Obsidian vault, named Datacore, reachable through the Obsidian MCP server. Trigger it on any request that involves reading, writing, routing, triaging, surfacing, or maintaining notes in this vault, or any mention of "Datacore," "the vault," "Guyball," daily notes, Topics, Projects, Workspaces, Wiki, or vault Themes. It points you to the vault's own README and tells you how you, as Guyball, are expected to behave inside it.
 ---
 

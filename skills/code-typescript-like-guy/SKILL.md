@@ -1,5 +1,5 @@
 ---
-name: guys-typescript-style
+name: code-typescript-like-guy
 description: Guy's personal TypeScript coding style — naming conventions, module structure, type-system idioms, class conventions, and small syntactic preferences. Use this skill whenever generating, writing, or editing TypeScript code (.ts/.tsx) for Guy, even if he doesn't explicitly mention style. This includes new files, edits to existing files, code reviews where you'd suggest replacement code, and any TypeScript snippet shown in conversation. The goal is to produce TypeScript that looks like Guy wrote it himself.
 ---
 
@@ -50,7 +50,7 @@ const message = "don't worry about it"
 
 /* No */
 const greeting = 'hello, ' + name
-const message = 'don\'t worry about it'
+const message = "don't worry about it"
 ```
 
 ## Naming
@@ -108,7 +108,7 @@ No mandatory prefix. Sometimes `is`/`has` reads well, sometimes a natural noun-p
 
 ### No abbreviations
 
-Spell identifiers out. `object`, not `obj`. `record`, not `rec`. `error`, not `err`. `request`, not `req`. `response`, not `res`. The few characters saved aren't worth the cognitive tax of decoding short forms — and modern editors autocomplete the full word in a keystroke or two anyway. Use established acronyms (`tcp`, `http`, `url`, `id`) — those aren't abbreviations of words, they *are* the words.
+Spell identifiers out. `object`, not `obj`. `record`, not `rec`. `error`, not `err`. `request`, not `req`. `response`, not `res`. The few characters saved aren't worth the cognitive tax of decoding short forms — and modern editors autocomplete the full word in a keystroke or two anyway. Use established acronyms (`tcp`, `http`, `url`, `id`) — those aren't abbreviations of words, they _are_ the words.
 
 ## Files, modules, and exports
 
@@ -161,7 +161,7 @@ Group by cohesion, not by mechanical rules. A small type alias used only by one 
   import { Server as UDP_Server } from 'dgram'
   ```
 
-- **Path aliases (`@foo`) when going *up* the hierarchy.** When the import would otherwise need `../` (one or more), use a path alias instead. Siblings and descendants stay relative (`./sibling`, `./child/thing`).
+- **Path aliases (`@foo`) when going _up_ the hierarchy.** When the import would otherwise need `../` (one or more), use a path alias instead. Siblings and descendants stay relative (`./sibling`, `./child/thing`).
 - Prefer `@foo` style aliases over `@/foo` style. The leading-slash variant is fine when a project's tsconfig already uses it, but new configs should drop the slash.
 - Use `import type { ... }` when importing only types — it's a small thing but it's the right signal.
 
@@ -292,7 +292,7 @@ function parseConfig(raw: string): Config {
 
 `null` is the preferred way to represent "intentionally nothing." `undefined` means "missing" or "not yet set" — a different semantic.
 
-- Return `null` from a function that explicitly *could not produce a value*.
+- Return `null` from a function that explicitly _could not produce a value_.
 - Leave `undefined` for things like uninitialized fields, missing optional parameters, or optional object properties.
 
 ```ts
@@ -309,11 +309,11 @@ function findUser(id: string): User | undefined {
 }
 ```
 
-When the language forces `undefined` (optional parameters, optional properties), that's fine — don't fight it. The rule is about *deliberate* absences in return values and assignments.
+When the language forces `undefined` (optional parameters, optional properties), that's fine — don't fight it. The rule is about _deliberate_ absences in return values and assignments.
 
 ## Regular expressions
 
-Always assign regexes to a named variable before using them. An inline regex in a `.match()` / `.test()` / `.replace()` call forces the reader to decode the pattern in their head. A named variable communicates *intent*.
+Always assign regexes to a named variable before using them. An inline regex in a `.match()` / `.test()` / `.replace()` call forces the reader to decode the pattern in their head. A named variable communicates _intent_.
 
 ```ts
 /* Yes */
@@ -328,7 +328,7 @@ if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input)) { ... }
 const trimmed = line.replace(/\s+$/, '')
 ```
 
-The variable name should describe what the pattern *matches* or what it's *for*, not the regex syntax. If you can't think of a good name, that's a signal the regex itself is doing too much.
+The variable name should describe what the pattern _matches_ or what it's _for_, not the regex syntax. If you can't think of a good name, that's a signal the regex itself is doing too much.
 
 ## Property access
 
@@ -448,7 +448,7 @@ const result = legacyParse(input)
 const result = legacyParse(input)
 ```
 
-**Content: default to no comments.** Add one only when the *why* is non-obvious — a hidden constraint, a subtle invariant, a workaround for a known issue. Don't narrate what the code does; well-named identifiers handle that. Don't reference the current task or PR (that belongs in commit messages).
+**Content: default to no comments.** Add one only when the _why_ is non-obvious — a hidden constraint, a subtle invariant, a workaround for a known issue. Don't narrate what the code does; well-named identifiers handle that. Don't reference the current task or PR (that belongs in commit messages).
 
 ---
 
@@ -472,4 +472,4 @@ const result = legacyParse(input)
 - Simple value-producing branches use ternaries
 - Imports going up the hierarchy use `@foo` aliases; siblings stay relative
 - Top-down file layout: imports, types, constants, main, helpers
-- Comments use `/* ... */`, written only when the *why* is non-obvious
+- Comments use `/* ... */`, written only when the _why_ is non-obvious
