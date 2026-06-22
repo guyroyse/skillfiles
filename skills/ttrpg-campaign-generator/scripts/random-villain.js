@@ -1,0 +1,45 @@
+const villains = [
+  "Agent Smith (The Matrix)",
+  "Bowser (Super Mario Bros.)",
+  "Captain Hook (Peter Pan)",
+  "Darth Vader (Star Wars)",
+  "Doctor Doom (Fantastic Four)",
+  "Dracula",
+  "Freddy Krueger (A Nightmare on Elm Street)",
+  "Ganondorf (The Legend of Zelda)",
+  "GLaDOS (Portal)",
+  "Gus Fring (Breaking Bad)",
+  "HAL 9000 (2001: A Space Odyssey)",
+  "Hannibal Lecter (The Silence of the Lambs)",
+  "Hans Gruber (Die Hard)",
+  "Ivan Drago (Rocky IV)",
+  "Jason Voorhees (Friday the 13th)",
+  "Khan (Star Trek)",
+  "Lex Luthor (Superman)",
+  "Loki (Marvel)",
+  "Magneto (X-Men)",
+  "Maleficent (Sleeping Beauty)",
+  "Michael Myers (Halloween)",
+  "Moriarty (Sherlock Holmes)",
+  "Negan (The Walking Dead)",
+  "Pennywise (It)",
+  "Pinhead (Hellraiser)",
+  "Sauron (The Lord of the Rings)",
+  "Sephiroth (Final Fantasy VII)",
+  "Skynet (The Terminator)",
+  "T-1000 (Terminator 2)",
+  "Thanos (Marvel)",
+  "The Borg (Star Trek)",
+  "The Joker (Batman)",
+  "The Night King (Game of Thrones)",
+  "The Phantom of the Opera",
+  "The White Witch (The Chronicles of Narnia)",
+  "The Wicked Witch of the West (The Wizard of Oz)",
+  "The Xenomorphs (Alien)",
+  "Voldemort (Harry Potter)"
+]
+
+// select a random villain
+const randomVillain = villains[Math.floor(Math.random() * villains.length)];
+console.log(randomVillain);
+
