@@ -12,6 +12,12 @@ Skills for tabletop role-playing game enthusiasts.
   Generates creative campaign ideas by randomly combining player types, plot
   structures, villain archetypes, and settings inspired by famous books,
   movies, and shows.
+- **[downcrawl-generator](skills/ttrpg-tools/downcrawl-generator)**:
+  Generates Folk (the strange peoples of the underworld) and Volumes (the
+  places worth journeying to) using the random tables from
+  [Downcrawl](https://downcrawl.textories.com/) by Aaron A. Reed (CC BY 4.0;
+  see the skill's
+  [LICENSE.md](skills/ttrpg-tools/downcrawl-generator/LICENSE.md)).
 
 ### Be Like Guy
 
