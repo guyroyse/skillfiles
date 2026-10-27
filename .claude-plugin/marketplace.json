@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "ttrpg-tools",
-      "description": "TTRPG tools: generate campaign ideas from random player types, plots, villains, and settings, and generate Folk and Volumes for Downcrawl.",
+      "description": "TTRPG tools: generate campaign ideas from random player types, plots, villains, and settings, generate Folk and Volumes for Downcrawl, and generate NPCs from random tables.",
       "source": "./",
       "skills": ["./skills/ttrpg-tools"],
       "strict": false,

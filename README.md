@@ -18,6 +18,9 @@ Skills for tabletop role-playing game enthusiasts.
   [Downcrawl](https://downcrawl.textories.com/) by Aaron A. Reed (CC BY 4.0;
   see the skill's
   [LICENSE.md](skills/ttrpg-tools/downcrawl-generator/LICENSE.md)).
+- **[npc-generator](skills/ttrpg-tools/npc-generator)**: Generates
+  non-player characters by rolling on random tables and weaving the results
+  into a cohesive character.
 
 ### Be Like Guy
 

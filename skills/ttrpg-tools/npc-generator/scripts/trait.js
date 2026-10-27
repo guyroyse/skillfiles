@@ -1,0 +1,32 @@
+const traitTable = [
+  'Ambition',
+  'Avarice',
+  'Bitterness',
+  'Charm',
+  'Courage',
+  'Cowardice',
+  'Curiosity',
+  'Deceitfulness',
+  'Determination',
+  'Devotion to a cause',
+  'Filiality',
+  'Gullibility',
+  'Hatred',
+  'Honesty',
+  'Hopefulness',
+  'Humor',
+  'Kindness',
+  'Laziness',
+  'Love of a person',
+  'Nihilism',
+  'Paranoia',
+  'Paternalism',
+  'Pessimism',
+  'Pride',
+  'Protectiveness',
+  'Resentment',
+  'Shame',
+  'Vanity'
+]
+
+console.log(traitTable[Math.floor(Math.random() * traitTable.length)])
