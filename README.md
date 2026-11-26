@@ -1,8 +1,8 @@
 # Skillfiles
 
-My personal collection of skills. Built on the
-[Agent Skills](https://agentskills.io/) open spec, so they work with Claude
-Code, Codex, Cursor, Gemini CLI, GitHub Copilot, and most other AI coding tools.
+My personal collection of skills for Claude Code, published as a plugin
+marketplace. Think dotfiles, but for skills. They're built on the
+[Agent Skills](https://agentskills.io/) open spec.
 
 ## Skills
 
@@ -30,45 +30,6 @@ Skills for writing in my voice.
 
 ## Installation
 
-Skills can be installed using the GitHub CLI, the `npx skills` CLI, or the
-Claude Code plugin marketplace. Pick whichever you have handy.
-
-### GitHub CLI (`gh skill`)
-
-Install everything:
-
-```sh
-gh skill install guyroyse/skillfiles
-```
-
-Install a specific skill:
-
-```sh
-gh skill install guyroyse/skillfiles social-post --agent claude-code --scope user
-```
-
-Preview before installing (always a good idea):
-
-```sh
-gh skill preview guyroyse/skillfiles
-```
-
-### npx skills
-
-Install everything:
-
-```sh
-npx skills add guyroyse/skillfiles
-```
-
-Install a specific skill:
-
-```sh
-npx skills add guyroyse/skillfiles --skill social-post
-```
-
-### Claude Code Plugin Marketplace
-
 Add the marketplace, then install one or both plugins:
 
 ```sh
@@ -85,33 +46,37 @@ Or from inside Claude Code:
 /plugin install write-like-guy@guys-skills
 ```
 
-Skills installed via the plugin marketplace are namespaced, so you invoke them
-as `/write-like-guy:social-post`.
+Skills are namespaced by plugin, so their full names look like
+`write-like-guy:social-post`. Claude loads them when a task matches, or you can
+invoke one directly with `/write-like-guy:social-post`.
+
+## Updating
+
+Pull the latest version of the marketplace and its plugins:
+
+```
+/plugin marketplace update guys-skills
+```
+
+If a skill that was renamed or removed still shows up, reinstall the plugin that
+held it.
 
 ## Making Skills Trigger Automatically
 
-Agents tend to ignore personal-style skills and assume they can handle things on
-their own. To force the issue, add a line to your agent-instructions file
-(`AGENTS.md`, `CLAUDE.md`, etc.) telling the agent when to apply the skill.
+Claude tends to ignore personal-style skills and assume it can handle things on
+its own. To force the issue, add a line to a `CLAUDE.md` file telling Claude
+when to use the skill, by its full name.
 
 It doesn't need to be fancy:
 
 ```markdown
-When generating or editing TypeScript, apply the code-typescript-like-guy skill.
+When generating or editing TypeScript, use the
+be-like-guy:code-typescript-like-guy skill.
+
+When writing a social media post or blog post for me, use the
+write-like-guy:voice skill along with write-like-guy:social-post or
+write-like-guy:blog-post.
 ```
 
-The location of your agent-instructions file varies by tool and scope:
-
-**Project-level** — drop `AGENTS.md` at the repo root. Most tools pick this up
-automatically. For Claude Code, you can import it from `CLAUDE.md` with
-`@AGENTS.md`.
-
-**User-global** — handy so you don't have to configure every project separately.
-Common locations:
-
-- Claude Code: `~/.claude/CLAUDE.md`
-- Codex: `~/.codex/AGENTS.md`
-- Gemini CLI: `~/.gemini/GEMINI.md`
-
-Cursor and GitHub Copilot don't have global instruction files — use
-project-level files for those.
+Put it in `~/.claude/CLAUDE.md` to apply it everywhere, or in a `CLAUDE.md` at
+the root of a repo to apply it to just that project.
