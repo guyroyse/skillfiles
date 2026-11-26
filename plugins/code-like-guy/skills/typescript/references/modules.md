@@ -1,14 +1,15 @@
 # Modules, Imports, and Functions
 
-Detailed examples for the file, module, import, and function rules in
-[SKILL.md](../SKILL.md).
+Detailed examples for the module, import, and function rules in
+[SKILL.md](../SKILL.md). File layout and granularity are covered by
+code-like-guy:style.
 
 ## Contents
 
-- Files, modules, and exports
+- Modules and exports
 - Functions
 
-## Files, modules, and exports
+## Modules and exports
 
 ### Exports
 
@@ -40,12 +41,6 @@ for the sake of it.
 Use `index.ts` barrels only at **module or package boundaries** — the public
 surface of a logical unit. Inside a module, import directly from the file. Don't
 barrel everything; it slows tree-shaking and invites circular imports.
-
-### File granularity
-
-Group by cohesion, not by mechanical rules. A small type alias used only by one
-function belongs in that function's file. When a file grows large or its
-contents start serving distinct concerns, split it.
 
 ### Imports
 
@@ -99,22 +94,6 @@ contents start serving distinct concerns, split it.
   /* No */
   import { createServer, type Server, type Socket } from 'net'
   ```
-
-### Within-file layout
-
-Top-down, by what the reader cares about first:
-
-```
-imports
-↓
-types
-↓
-constants
-↓
-main implementation (the thing the file is about)
-↓
-helpers below
-```
 
 ## Functions
 

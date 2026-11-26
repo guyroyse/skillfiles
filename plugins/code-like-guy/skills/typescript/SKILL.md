@@ -7,7 +7,8 @@ description: >-
   for Guy, even if he doesn't explicitly mention style. This includes new files,
   edits to existing files, code reviews where you'd suggest replacement code,
   and any TypeScript snippet shown in conversation. The goal is to produce
-  TypeScript that looks like Guy wrote it himself.
+  TypeScript that looks like Guy wrote it himself. Always use it together with
+  code-like-guy:style, which covers the principles that hold in any language.
 ---
 
 # Guy's TypeScript Style
@@ -16,6 +17,10 @@ The goal of this skill is to make generated TypeScript indistinguishable from
 code Guy would write by hand. The rules below are the ones that distinguish his
 code from generic TypeScript — follow every one of them. Where this skill is
 silent, fall back to idiomatic modern TypeScript.
+
+The principles that hold in any language — the rule of three, duplication,
+naming, comments, and file layout — come from **code-like-guy:style**. Load it
+first; this skill assumes it and covers only what's specific to TypeScript.
 
 Every rule is stated here. Each section links to a reference file with fuller
 examples and edge cases; read it when a rule's application isn't obvious.
@@ -32,11 +37,6 @@ Details: [references/naming.md](references/naming.md)
 - Code examples in this skill are inside a function unless they say otherwise.
 - File names are `kebab-case`, always lowercase: `tcp-processor.ts`,
   `user-card.tsx`.
-- **No abbreviations.** `object`, not `obj`; `error`, not `err`; `request`, not
-  `req`. A short form is an abbreviation if it would take a period in prose, so
-  words like `config`, `app`, `arg`, and `param` are fine. Acronyms (`tcp`,
-  `http`, `url`) are fine too — they _are_ the words.
-- Booleans need no `is`/`has` prefix; use whatever reads most clearly.
 - **The acronym rule.** An acronym followed by another capitalized word gets an
   underscore after it, so the reader can see where it ends. At the start of a
   camelCase identifier it's lowercased instead, and at the end of an identifier
@@ -51,19 +51,12 @@ Details: [references/naming.md](references/naming.md)
   const userID = ulid() /* ID, not Id */
   ```
 
-- Names from outside code (`innerHTML`, `toJSON`, `XMLHttpRequest`) are used
-  as-is, never rewritten to fit these rules.
-
 ## Comments
 
 Details: [references/expressions.md](references/expressions.md), "Comments"
 
-- **Comments should be rare.** Names do the explaining. Reaching for a comment
-  is a sign that something is poorly named — rename it, or pull the unclear
-  expression or block out into a well-named variable or function.
-- Comment only the _why_ no name can carry: a hidden constraint, a subtle
-  invariant, a workaround. Never narrate the code or mention the current task.
-- Use `/* ... */` for every comment. Never `//`.
+- Use `/* ... */` for every comment — inline, end-of-line, multi-line, and
+  doc-style. Never `//`.
 
 ## Control flow
 
@@ -108,9 +101,6 @@ Details: [references/modules.md](references/modules.md)
   it isn't set up for aliases at all, use `../`. Siblings and children stay
   relative.
 - `index.ts` barrels only at module or package boundaries.
-- File layout, top-down: imports, types, constants, the main implementation,
-  then helpers.
-- Group code by cohesion; split a file when it starts serving distinct concerns.
 - Module-level functions are `function` declarations, not arrow functions
   assigned to `const`. Arrows are for callbacks and short closures.
 
@@ -139,15 +129,13 @@ Details: [references/types-and-classes.md](references/types-and-classes.md)
 
 Details: [references/expressions.md](references/expressions.md)
 
-- Assign every regex to a variable named for what it matches, then use it:
-  `const TRAILING_WHITESPACE = /\s+$/` at module level, `trailingWhitespace`
-  inside a function.
+- A named regex is yelly case at module level
+  (`const TRAILING_WHITESPACE = /\s+$/`) and camelCase inside a function.
 - Dot access for properties with valid identifier names. Brackets only for
   dynamic keys, odd characters, or index signatures under
   `noPropertyAccessFromIndexSignature`.
 - Destructure when pulling several fields off an object or accepting options.
-- Generate IDs as ULIDs with the `ulid` package (`import { ulid } from 'ulid'`),
-  not UUIDs — unless the project or an external system already uses UUIDs.
+- Generate ULIDs with the `ulid` package: `import { ulid } from 'ulid'`.
 
 ## Formatting
 

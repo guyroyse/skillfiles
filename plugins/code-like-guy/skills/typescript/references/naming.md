@@ -1,6 +1,8 @@
 # Naming
 
-Detailed examples for the naming rules in [SKILL.md](../SKILL.md).
+Detailed examples for the TypeScript naming rules in [SKILL.md](../SKILL.md).
+Abbreviations, booleans, and names from outside code are covered by
+code-like-guy:style.
 
 ## Contents
 
@@ -8,9 +10,6 @@ Detailed examples for the naming rules in [SKILL.md](../SKILL.md).
 - C-style constants
 - The acronym rule
 - `ID`
-- Names from outside code
-- Booleans
-- No abbreviations
 
 ## Naming
 
@@ -116,27 +115,3 @@ class IdGenerator {}
 
 A bare `id`, such as a field or parameter, stays lowercase — it's a camelCase
 identifier that starts with the acronym.
-
-### Names from outside code
-
-Names that come from a platform, library, or external API (`innerHTML`,
-`toJSON`, `XMLHttpRequest`, a JSON field named `user_id`) are used exactly as
-they are. These rules apply to the names you choose, not the ones you consume.
-
-### Booleans
-
-No mandatory prefix. Sometimes `is`/`has` reads well, sometimes a natural
-noun-phrase does. Pick whichever reads more clearly in context.
-
-### No abbreviations
-
-Spell identifiers out. `object`, not `obj`. `record`, not `rec`. `error`, not
-`err`. `request`, not `req`. `response`, not `res`. The few characters saved
-aren't worth the cognitive tax of decoding short forms — and modern editors
-autocomplete the full word in a keystroke or two anyway.
-
-The test for an abbreviation: would it take a period in prose? "Obj." and "req."
-would, so they're out. `config`, `app`, `arg`, and `param` wouldn't — they're
-words in their own right, so they're fine. Established acronyms (`tcp`, `http`,
-`url`, `ID`) are fine too — those aren't abbreviations of words, they _are_ the
-words.

@@ -1,7 +1,7 @@
 # Strings, Expressions, and Comments
 
 Detailed examples for the string, ID, regex, property-access, destructuring,
-`if`, ternary, and comment rules in [SKILL.md](../SKILL.md).
+`if`, ternary, and comment-syntax rules in [SKILL.md](../SKILL.md).
 
 ## Contents
 
@@ -62,8 +62,7 @@ const message = [`Hello, ${name}.`, 'Your order has shipped.'].join('\n')
 
 ## IDs
 
-Generate unique IDs as [ULIDs](https://github.com/ulid/spec), not UUIDs. ULIDs
-sort by creation time and read more compactly. Use the
+code-like-guy:style says to use ULIDs. In TypeScript, generate them with the
 [`ulid`](https://www.npmjs.com/package/ulid) package.
 
 ```ts
@@ -76,13 +75,10 @@ import { randomUUID } from 'crypto'
 const id = randomUUID()
 ```
 
-When a project or an external system already uses UUIDs, stick with them.
-
 ## Regular expressions
 
-Always assign regexes to a named variable before using them. An inline regex in
-a `.match()` / `.test()` / `.replace()` call forces the reader to decode the
-pattern in their head. A named variable communicates _intent_.
+code-like-guy:style says to name every regex rather than inlining it in a
+`.match()`, `.test()`, or `.replace()` call.
 
 At module level, a regex is a C-style constant and gets yelly case. Inside a
 function, it's camelCase.
@@ -103,10 +99,6 @@ const trimmed = line.replace(trailingWhitespace, '')
 if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input)) { ... }
 const trimmed = line.replace(/\s+$/, '')
 ```
-
-The variable name should describe what the pattern _matches_ or what it's _for_,
-not the regex syntax. If you can't think of a good name, that's a signal the
-regex itself is doing too much.
 
 ## Property access
 
@@ -231,10 +223,11 @@ If the branches grow, or the condition is complex, fall back to `if`/`else`.
 
 ## Comments
 
-Two rules here:
+How often to comment, and what about, is covered by code-like-guy:style. This
+section covers syntax.
 
-**Style: use `/* ... */`, not `//`.** Block-comment syntax for everything —
-inline, end-of-line, multi-line, doc-style. Single-line `//` comments are out.
+**Use `/* ... */`, not `//`.** Block-comment syntax for everything — inline,
+end-of-line, multi-line, doc-style. Single-line `//` comments are out.
 
 ```ts
 /* Yes */
@@ -245,24 +238,3 @@ const result = legacyParse(input)
 // fallback to legacy parser because the new one chokes on CR-only line endings
 const result = legacyParse(input)
 ```
-
-**Content: comments should be rare.** Let names do the explaining — of
-variables, functions, classes, modules, and files. When you find yourself
-reaching for a comment, take it as a sign that the thing it describes is poorly
-named, and rename it instead. Pull an unclear expression out into a well-named
-variable, or an unclear block out into a well-named function.
-
-```ts
-/* Yes */
-const isEligibleForDiscount = user.age >= 65 || user.isVeteran
-if (isEligibleForDiscount) applyDiscount(order)
-
-/* No */
-/* seniors and veterans get a discount */
-if (user.age >= 65 || user.isVeteran) applyDiscount(order)
-```
-
-Write a comment only for what no name can carry: the _why_ behind a hidden
-constraint, a subtle invariant, or a workaround for a known issue. Never narrate
-what the code does, and don't reference the current task or PR (that belongs in
-commit messages).
