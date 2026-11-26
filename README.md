@@ -10,10 +10,10 @@ marketplace. Think dotfiles, but for skills. They're built on the
 
 Skills that encode my personal style for coding and note-taking.
 
-- **[code-typescript-like-guy](skills/be-like-guy/code-typescript-like-guy)**:
+- **[code-typescript-like-guy](plugins/be-like-guy/skills/code-typescript-like-guy)**:
   My TypeScript coding style — naming conventions, module structure, type-system
   idioms, class conventions, and syntactic preferences.
-- **[use-obsidian-like-guy](skills/be-like-guy/use-obsidian-like-guy)**:
+- **[use-obsidian-like-guy](plugins/be-like-guy/skills/use-obsidian-like-guy)**:
   Operates within my Obsidian vault (Datacore) — reading, writing, routing, and
   maintaining notes the way I like them.
 
@@ -21,12 +21,13 @@ Skills that encode my personal style for coding and note-taking.
 
 Skills for writing in my voice.
 
-- **[voice](skills/write-like-guy/voice)**: My writing voice — plainspoken and
-  casual with precise technical authority. The other writing skills build on it.
-- **[social-post](skills/write-like-guy/social-post)**: The shape of a social
-  media post — hook, tl;dr, link, and a close that lands.
-- **[blog-post](skills/write-like-guy/blog-post)**: The shape of a blog post —
-  hook, a real lesson, examples, and a close that lands.
+- **[voice](plugins/write-like-guy/skills/voice)**: My writing voice —
+  plainspoken and casual with precise technical authority. The other writing
+  skills build on it.
+- **[social-post](plugins/write-like-guy/skills/social-post)**: The shape of a
+  social media post — hook, tl;dr, link, and a close that lands.
+- **[blog-post](plugins/write-like-guy/skills/blog-post)**: The shape of a blog
+  post — hook, a real lesson, examples, and a close that lands.
 
 ## Installation
 

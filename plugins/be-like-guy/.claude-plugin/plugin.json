@@ -1,0 +1,11 @@
+{
+  "name": "be-like-guy",
+  "description": "Code like Guy and use Obsidian like Guy — Guy Royse's personal style skills.",
+  "author": {
+    "name": "Guy Royse",
+    "url": "https://github.com/guyroyse"
+  },
+  "homepage": "https://github.com/guyroyse/skillfiles",
+  "repository": "https://github.com/guyroyse/skillfiles",
+  "keywords": ["typescript", "obsidian", "style"]
+}

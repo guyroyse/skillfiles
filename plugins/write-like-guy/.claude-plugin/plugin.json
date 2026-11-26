@@ -1,0 +1,11 @@
+{
+  "name": "write-like-guy",
+  "description": "Write like Guy — his voice, plus skills for social media posts and blog posts.",
+  "author": {
+    "name": "Guy Royse",
+    "url": "https://github.com/guyroyse"
+  },
+  "homepage": "https://github.com/guyroyse/skillfiles",
+  "repository": "https://github.com/guyroyse/skillfiles",
+  "keywords": ["writing", "voice", "social-media", "blogging"]
+}
