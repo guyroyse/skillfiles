@@ -10,7 +10,13 @@
     {
       "name": "be-like-guy",
       "source": "./plugins/be-like-guy",
-      "description": "Code like Guy and use Obsidian like Guy — Guy Royse's personal style skills.",
+      "description": "Use Obsidian like Guy — Guy Royse's personal style skills.",
+      "category": "productivity"
+    },
+    {
+      "name": "code-like-guy",
+      "source": "./plugins/code-like-guy",
+      "description": "Code like Guy — his personal coding style, starting with TypeScript.",
       "category": "productivity"
     },
     {

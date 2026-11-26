@@ -1,0 +1,11 @@
+{
+  "name": "code-like-guy",
+  "description": "Code like Guy — his personal coding style, starting with TypeScript.",
+  "author": {
+    "name": "Guy Royse",
+    "url": "https://github.com/guyroyse"
+  },
+  "homepage": "https://github.com/guyroyse/skillfiles",
+  "repository": "https://github.com/guyroyse/skillfiles",
+  "keywords": ["coding", "style", "typescript"]
+}

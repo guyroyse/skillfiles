@@ -8,14 +8,19 @@ marketplace. Think dotfiles, but for skills. They're built on the
 
 ### Be Like Guy
 
-Skills that encode my personal style for coding and note-taking.
+Skills that encode my personal style for note-taking.
 
-- **[code-typescript-like-guy](plugins/be-like-guy/skills/code-typescript-like-guy)**:
-  My TypeScript coding style — naming conventions, module structure, type-system
-  idioms, class conventions, and syntactic preferences.
 - **[use-obsidian-like-guy](plugins/be-like-guy/skills/use-obsidian-like-guy)**:
   Operates within my Obsidian vault (Datacore) — reading, writing, routing, and
   maintaining notes the way I like them.
+
+### Code Like Guy
+
+Skills for writing code in my style.
+
+- **[typescript](plugins/code-like-guy/skills/typescript)**: My TypeScript
+  coding style — naming conventions, module structure, type-system idioms, class
+  conventions, and syntactic preferences.
 
 ### Write Like Guy
 
@@ -31,11 +36,12 @@ Skills for writing in my voice.
 
 ## Installation
 
-Add the marketplace, then install one or both plugins:
+Add the marketplace, then install whichever plugins you want:
 
 ```sh
 claude plugin marketplace add guyroyse/skillfiles
 claude plugin install be-like-guy@guys-skills
+claude plugin install code-like-guy@guys-skills
 claude plugin install write-like-guy@guys-skills
 ```
 
@@ -44,6 +50,7 @@ Or from inside Claude Code:
 ```
 /plugin marketplace add guyroyse/skillfiles
 /plugin install be-like-guy@guys-skills
+/plugin install code-like-guy@guys-skills
 /plugin install write-like-guy@guys-skills
 ```
 
@@ -71,8 +78,7 @@ when to use the skill, by its full name.
 It doesn't need to be fancy:
 
 ```markdown
-When generating or editing TypeScript, use the
-be-like-guy:code-typescript-like-guy skill.
+When generating or editing TypeScript, use the code-like-guy:typescript skill.
 
 When writing a social media post or blog post for me, use the
 write-like-guy:voice skill along with write-like-guy:social-post or
