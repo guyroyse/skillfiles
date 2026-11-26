@@ -4,4 +4,4 @@ Thumbs.db
 
 # IDE bits
 .vscode/
-.claude/
+.claude/settings.local.json
