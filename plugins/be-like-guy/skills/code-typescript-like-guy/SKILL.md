@@ -19,7 +19,7 @@ this skill is silent, fall back to idiomatic modern TypeScript.
 
 ## Formatting
 
-Guy's `.prettierrc` is:
+Guy's projects use Prettier with this `.prettierrc`:
 
 ```json
 {
@@ -30,23 +30,14 @@ Guy's `.prettierrc` is:
   "arrowParens": "avoid",
   "printWidth": 80,
   "tabWidth": 2,
-  "useTabs": false
+  "useTabs": false,
+  "proseWrap": "always"
 }
 ```
 
-Generated TypeScript must follow this whether or not Prettier is wired up in the
-project:
-
-- **No semicolons.** Newlines are statement terminators. Only use a leading `;`
-  where ASI would genuinely misparse (rare).
-- **Single quotes** for string literals by default.
-- **No trailing commas** in arrays, objects, function arguments, or type lists.
-- **Bracket spacing on:** `{ foo }`, not `{foo}`.
-- **Arrow parens avoided** for single-parameter arrows: `x => x * 2`, not
-  `(x) => x * 2`. Multi-parameter or typed arrows keep parens as the syntax
-  requires.
-- **2 spaces** for indentation, never tabs.
-- **80 char** line width target.
+Use it when setting up a new project, and follow it in code shown in
+conversation, where Prettier never runs. When a project has its own Prettier
+config, that config wins.
 
 ## Strings
 
@@ -549,8 +540,7 @@ the current task or PR (that belongs in commit messages).
 
 ## Quick checklist before finalizing TypeScript output
 
-- Formatting matches the Prettier config: no semis, single quotes, no trailing
-  commas, 2-space indent, `x => x` arrows, `{ foo }` bracket spacing
+- Code shown in conversation follows the Prettier config
 - Template literals for interpolation; double quotes only when the string
   contains an apostrophe
 - Identifiers are spelled out, no abbreviations (`object` not `obj`, `error` not
