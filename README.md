@@ -6,17 +6,26 @@ My personal collection of skills. Built on the [Agent Skills](https://agentskill
 
 ### Be Like Guy
 
-Skills that encode my personal style for writing and coding.
+Skills that encode my personal style for coding and note-taking.
 
 - **[code-typescript-like-guy](skills/be-like-guy/code-typescript-like-guy)**:
   My TypeScript coding style — naming conventions, module structure,
   type-system idioms, class conventions, and syntactic preferences.
-- **[write-like-guy](skills/be-like-guy/write-like-guy)**: Writes social media
-  posts and short promotional copy in my voice — plainspoken and casual with
-  precise technical authority.
 - **[use-obsidian-like-guy](skills/be-like-guy/use-obsidian-like-guy)**:
   Operates within my Obsidian vault (Datacore) — reading, writing, routing,
   and maintaining notes the way I like them.
+
+### Write Like Guy
+
+Skills for writing in my voice.
+
+- **[voice](skills/write-like-guy/voice)**: My writing voice — plainspoken and
+  casual with precise technical authority. The other writing skills build on
+  it.
+- **[social-post](skills/write-like-guy/social-post)**: The shape of a social
+  media post — hook, tl;dr, link, and a close that lands.
+- **[blog-post](skills/write-like-guy/blog-post)**: The shape of a blog post —
+  hook, a real lesson, examples, and a close that lands.
 
 ## Installation
 
@@ -34,7 +43,7 @@ gh skill install guyroyse/skillfiles
 Install a specific skill:
 
 ```sh
-gh skill install guyroyse/skillfiles write-like-guy --agent claude-code --scope user
+gh skill install guyroyse/skillfiles social-post --agent claude-code --scope user
 ```
 
 Preview before installing (always a good idea):
@@ -54,16 +63,17 @@ npx skills add guyroyse/skillfiles
 Install a specific skill:
 
 ```sh
-npx skills add guyroyse/skillfiles --skill write-like-guy
+npx skills add guyroyse/skillfiles --skill social-post
 ```
 
 ### Claude Code Plugin Marketplace
 
-Add the marketplace, then install the plugin:
+Add the marketplace, then install one or both plugins:
 
 ```sh
 claude plugin marketplace add guyroyse/skillfiles
 claude plugin install be-like-guy@guys-skills
+claude plugin install write-like-guy@guys-skills
 ```
 
 Or from inside Claude Code:
@@ -71,10 +81,11 @@ Or from inside Claude Code:
 ```
 /plugin marketplace add guyroyse/skillfiles
 /plugin install be-like-guy@guys-skills
+/plugin install write-like-guy@guys-skills
 ```
 
 Skills installed via the plugin marketplace are namespaced, so you invoke them
-as `/be-like-guy:write-like-guy`.
+as `/write-like-guy:social-post`.
 
 ## Making Skills Trigger Automatically
 

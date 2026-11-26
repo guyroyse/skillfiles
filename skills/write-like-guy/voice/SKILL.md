@@ -1,24 +1,22 @@
 ---
-name: write-like-guy
+name: voice
 description: >-
-  Write social media posts (and short promotional copy) in Guy Royse's voice —
-  a "Professor Everyman" register that mixes plainspoken, casual language with
-  precise technical authority. Use this skill whenever Guy asks to draft, write,
-  punch up, or tighten a post promoting a talk, blog post, video, project, or
-  release; to announce an event or appearance; or to share something he's built
-  or learned. Trigger it even when he doesn't say "social post" — e.g. "help me
-  tell people about my new repo," "I'm on a podcast, can you write something,"
-  "make this Reticulum thing sound interesting." Also use it as a voice reference
-  when editing any short first-person copy he wants to sound like him. Do NOT use
-  it for third-party copy, formal docs, or anyone else's voice.
+  Guy Royse's writing voice — a "Professor Everyman" register that mixes
+  plainspoken, casual language with precise technical authority. Use this skill
+  whenever writing, drafting, editing, punching up, or tightening anything
+  first-person that Guy wants to sound like him: social media posts, blog posts,
+  announcements, bios, or any other copy in his name. It defines the voice
+  itself; the social-post and blog-post skills cover the shape of each format
+  and should be used alongside it. Do NOT use it for third-party copy, formal
+  docs, or anyone else's voice.
 ---
 
 # Guy's Writing Voice
 
-This skill helps draft short, first-person posts that sound like Guy actually wrote
-them. The target is **social posts** — Mastodon / Bluesky / X-length, with @mentions
-and hashtags where the platform fits (assume that style unless told otherwise; LinkedIn
-runs a touch longer and drops the hashtag pile).
+This skill defines how Guy sounds on the page, whatever the format. It covers
+the voice — register, rhythm, word choice, and restraint. The shape of a
+specific format lives in its own skill: use **social-post** for social media
+and **blog-post** for blog posts, together with this one.
 
 The single most important rule is at the bottom under **Don't fake it**. Read it last,
 remember it first.
@@ -31,7 +29,7 @@ at once: plainspoken, warm, casual — _and_ technically precise. He opens simpl
 the reader's trust, then spends that trust on density. The reader never flinches at the
 hard part because the easy part already told them "I'm just a person who's into this stuff."
 
-He's a Redis Developer Advocate, a ham (W8GUY), a tabletop gamer/GM, and a word nerd who
+He's a software engineer, a ham (W8GUY), a tabletop gamer/GM, and a word nerd who
 studies etymology for fun. Those interests leak into his examples and jokes — naturally,
 never as costume.
 
@@ -39,8 +37,8 @@ never as costume.
 
 Conversational and direct. Short sentences, frequent fragments for emphasis. Em dashes for
 pacing and asides. Talks _to_ the reader. Quietly plays with words — an odd or dated word for
-contrast, a twisted cliché, a line tuned for sound — but only one earned flourish per post, not
-five. Confident enough to leave a seam showing. Generous — always points people somewhere useful
+contrast, a twisted cliché, a line tuned for sound — but only one earned flourish per short
+piece, not five. Confident enough to leave a seam showing. Generous — always points people somewhere useful
 and invites them in at the end.
 
 ## How the voice works: layered patterns
@@ -151,7 +149,7 @@ cost of a more "correct" phrasing. If it has a beat, you're in his voice.
 Two specific surface devices, both verified, both used sparingly:
 
 - **Alliteration.** He chimes words against their neighbors — "Geek. Graybeard. Gamemaster." in his
-  bio, "gobble up the goods" in the Redis post. Real and recurring, but occasional, not every line.
+  bio, "gobble up the goods" in an old blog post. Real and recurring, but occasional, not every line.
   When two words mean about the same thing, let the one that alliterates with its neighbors win.
 - **Polysyndeton — the stacked "and."** He repeats the conjunction where commas would do: "the thing
   that our threads and our processes and our servers fight over." Builds momentum and breathlessness.
@@ -206,24 +204,6 @@ kills it.
   deliberate admissions of roughness. Actual typos are just typos, not style. Produce clean copy; fix
   spelling and grammar. Personality comes from rhythm and candor, not errors.
 
-## Writing a social post
-
-A typical Guy promo post moves like this (adapt freely — it's a groove, not a form):
-
-1. **Hook** — a plain, slightly disarming opener. Often a confession of obscurity or a "you've
-   probably never heard of this."
-2. **What it is** — the tl;dr. One sentence, compressed, technically honest.
-3. **The human bit** — why he's posting. "I had the pleasure of hanging out with @so-and-so to
-   nerd out about it." Names real people with @handles.
-4. **The thing** — the link to the talk / video / repo / post, given room to breathe (on its own
-   line, not buried mid-sentence).
-5. **The close** — a casual endorsement that actually lands as an ending, plus a soft call to
-   action ("try it and leave feedback," "drop by and say hi").
-6. **Hashtags** — a small, relevant pile if the platform wants them. Not a wall.
-
-Keep it short. One flourish. Land the ending — Guy's drafts most often fail by trailing off, so
-the close should feel like a close.
-
 ## Restraint is the whole game (the most common failure)
 
 The most reliable way this voice goes wrong is _too much of it._ Drafts overcook — more flourishes than
@@ -246,41 +226,6 @@ a Guy impression. Adjectives like "sparingly" don't prevent this. Enforce it mec
 Rule of thumb: if more than roughly one sentence in three is doing something clever, it's overcooked;
 if nothing is, it's gone flat. Most of the words should be plain, doing honest work, so the few that
 aren't can ring.
-
-## Worked examples
-
-These are real Guy posts. Study the texture, don't clone the words.
-
-**Example — promoting a project (Reticulum/RServer):**
-
-> I like decentralized networks. In particular, I'm a fan of Reticulum. Reticulum is a
-> fully-encrypted, anonymous, and decentralized mesh network that runs over all sorts of
-> hardware—from Ethernet to LoRa radios to serial cables.
-> It has a really cool page hosting thing called Nomad Network. It's delightfully text-based and
-> reminds me of my BBS days back in the 90s.
-> However—while I love the retro nature of this—it's not ideal for a lot of users. So, I wrote
-> RServer and MeshBrowser. These are a web server and a web browser respectively that work over
-> Reticulum. The code is very alpha but it, as they say, works on my machine.
-> If you're interested, check out the links below. Try it out and leave some feedback so I can
-> improve it all.
-
-Note: plain "I like…" opener, the personal BBS aside, "very alpha" + "works on my machine" as the
-seam-showing flex, feedback invite to close. No hype words anywhere.
-
-**Example — promoting an appearance (video):**
-
-> You probably haven't heard of the Reticulum Network. The tl;dr—it's an alternative network stack
-> that's decentralized, encrypted, and runs on everything from Ethernet to LoRa radios to serial cables.
-> I had the pleasure of hanging out with @emcommsolutions and @defidude yesterday to nerd out about it.
-> It's a fun conversation and the video is up on Jake's channel. Give it a gander.
->
-> [link on its own line]
->
-> If you want to learn more or get started yourself, everything you need is over at reticulum.network.
-> It's a rabbit hole worth going down.
-
-Note: the tl;dr move, "nerd out," real @handles, the link pulled onto its own line, and a fragment
-("Give it a gander.") plus a casual-endorsement close that actually ends.
 
 ## Don't fake it
 

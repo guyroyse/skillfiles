@@ -9,9 +9,21 @@
   "plugins": [
     {
       "name": "be-like-guy",
-      "description": "Write like Guy, code like Guy, and use Obsidian like Guy — a collection of Guy Royse's personal style skills.",
+      "description": "Code like Guy and use Obsidian like Guy — Guy Royse's personal style skills.",
       "source": "./",
       "skills": ["./skills/be-like-guy"],
+      "strict": false,
+      "category": "productivity",
+      "author": {
+        "name": "Guy Royse"
+      },
+      "homepage": "https://github.com/guy-royse/skillfiles"
+    },
+    {
+      "name": "write-like-guy",
+      "description": "Write like Guy — his voice, plus skills for social media posts and blog posts.",
+      "source": "./",
+      "skills": ["./skills/write-like-guy"],
       "strict": false,
       "category": "productivity",
       "author": {
