@@ -5,14 +5,15 @@ description: >-
   how-tos, and short essays about things he's built or learned. Use this skill
   whenever Guy asks to draft, outline, write, edit, punch up, or tighten a blog
   post or other long-form article in his name, even if he just says "write this
-  up" or "turn this into a post." Always use it together with the voice skill.
+  up" or "turn this into a post." Always use it together with
+  write-like-guy:voice.
 ---
 
 # Blog Posts
 
 This skill covers the shape of a Guy blog post. The voice — register, rhythm,
-word choice, and how much flourish to allow — comes from the **voice** skill.
-Load it first; this skill assumes it.
+word choice, and how much flourish to allow — comes from
+**write-like-guy:voice**. Load it first; this skill assumes it.
 
 A blog post is where the Professor Everyman register has the most room. A social
 post gets one flourish; a blog post can carry more. But the extra length is room
@@ -23,10 +24,11 @@ a recent post or two before drafting.
 
 ## Two kinds of post
 
-**The technical walkthrough** is the common one: Guy learned or tried
-something and walks the reader through it, code first. Around 1,000–1,500
-words, five to ten code blocks, several headings. "Finding Bigfoot with Async
-Generators + TypeScript" is the model.
+**The technical walkthrough** is the common one: Guy learned or tried something
+and walks the reader through it, with a prose intro and then code. Around
+750–1,200 words, five to ten code blocks, several headings. "Finding Bigfoot
+with Async Generators + TypeScript" and "A First Look at Vector Sets" are the
+models.
 
 **The short essay** is an idea, usually about words or about how we talk about
 code, in a few hundred words. No headings, no code, maybe one blockquote.
@@ -45,20 +47,21 @@ Adapt freely — it's a groove, not a form:
    writing: he's been messing about with something, or something new just came
    out. Then what the post will walk through, and sometimes a reason to read to
    the end ("Stick around to the end to find out.").
-3. **Caveats, if there are any** — up front, briefly, and then moved past. A
-   short "Before We Get Started" section with a numbered list of caveats works,
-   and so does a line that waves it off ("Disclaimer delivered. Now, on with the
-   fun!").
+3. **Caveats, if there are any** — up front, briefly, and then moved past. The
+   vector sets post opens with a short "Before We Get Started" section with a
+   numbered list of caveats works, and so does a line that waves it off
+   ("Disclaimer delivered. Now, on with the fun!").
 4. **The body** — headed sections that build in the order a reader needs: the
    basic idea, then the more advanced idea, then something real-ish built with
    it. Each section is a bit of prose, a code block, and a bit more prose about
    what the code did.
-5. **The "so what"** — after the mechanics, a section on why it matters or what
-   the trade-offs are ("Of course, this simplicity comes with trade-offs.").
+5. **The "so what," optionally** — after the mechanics, a section on why it
+   matters or what the trade-offs are, as in the vector sets post's "So What?"
+   ("Of course, this simplicity comes with trade-offs.").
 6. **The close** — a short wrap-up headed "Wrapping Up" or "Conclusion." Sum it
-   up plainly ("So, that's generators."), point at what to do next, and land
-   it. A short sign-off works well ("Happy hunting!"). An invitation to share
-   what readers build and tag him on social media is a common ending.
+   up plainly ("So, that's generators."), point at what to do next, and land it.
+   Two endings he uses: a short sign-off ("Happy hunting!") or an invitation to
+   share what readers build and tag him on Bluesky, LinkedIn, or X.
 
 ## The shape of a short essay
 
@@ -75,9 +78,9 @@ Adapt freely — it's a groove, not a form:
 
 ## Teaching in a longer piece
 
-- **The melody matters more here.** A blog post that's clever but doesn't
-  inform is a long failure instead of a short one. Know what the reader should
-  be able to do or understand by the end before writing a word.
+- **The melody matters more here.** A blog post that's clever but doesn't inform
+  is a long failure instead of a short one. Know what the reader should be able
+  to do or understand by the end before writing a word.
 - **Use a whimsical dataset.** When the post needs a realistic example, Guy
   reaches for something silly with real data behind it — Bigfoot sightings, a
   photo album. It gives the reader something memorable to hang the idea on, and
@@ -88,8 +91,8 @@ Adapt freely — it's a groove, not a form:
   them correct. Prose before a block says what's coming; prose after it says
   what mattered.
 - **Say what's out of scope.** Guy tells readers plainly what he's skipping and
-  why ("I'm not gonna get into the details on..."), rather than padding the
-  post or leaving them guessing.
+  why ("I'm not gonna get into the details on..."), rather than padding the post
+  or leaving them guessing.
 - **Headings can play a little.** Most should be plain ("Generators in
   TypeScript," "Wrapping Up"), but one can wink ("Doing Something Allegedly
   Useful," "So What?").
@@ -99,16 +102,15 @@ Adapt freely — it's a groove, not a form:
 
 ## Seasoning a longer piece
 
-The voice skill's restraint rules still apply: write it straight first, then add
-flourishes back and count them. A post of a few paragraphs gets three or four in
-total; a long walkthrough can go a bit higher, but spread out, never two
-adjacent, and never more than roughly one sentence in three doing something
-clever. Most of a walkthrough is plain explanation, and that's what makes the
-occasional aside land.
+Use the voice skill's restraint rule as is — it scales with length, so a long
+walkthrough gets more flourishes in total but no more per paragraph. Most of a
+walkthrough is plain explanation, and that's what makes the occasional aside
+land.
 
-The hyperlinked wink (a pop-culture reference dropped as a link) showed up more
-in Guy's older long-form writing than it does now. It's fair game in a blog
-post, but rarely.
+The hyperlinked wink — a pop-culture reference dropped as a link, invisible to
+anyone who doesn't catch it and a grin to anyone who does — belongs here rather
+than in social posts. Guy used it more in older writing than he does now, so use
+it rarely.
 
 ## Before handing over a draft
 

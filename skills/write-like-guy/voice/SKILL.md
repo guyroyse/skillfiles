@@ -4,253 +4,191 @@ description: >-
   Guy Royse's writing voice — a "Professor Everyman" register that mixes
   plainspoken, casual language with precise technical authority. Use this skill
   whenever writing, drafting, editing, punching up, or tightening anything
-  first-person that Guy wants to sound like him: social media posts, blog posts,
-  announcements, bios, or any other copy in his name. It defines the voice
-  itself; the social-post and blog-post skills cover the shape of each format
-  and should be used alongside it. Do NOT use it for third-party copy, formal
-  docs, or anyone else's voice.
+  first-person that Guy wants to sound like him. For social media posts and blog
+  posts, use it together with write-like-guy:social-post or
+  write-like-guy:blog-post, which cover the shape of each format. For anything
+  else in his name — a talk abstract, a bio, a newsletter, an email — use it on
+  its own. Do NOT use it for third-party copy, formal docs, or anyone else's
+  voice.
 ---
 
 # Guy's Writing Voice
 
-This skill defines how Guy sounds on the page, whatever the format. It covers
-the voice — register, rhythm, word choice, and restraint. The shape of a
-specific format lives in its own skill: use **social-post** for social media
-and **blog-post** for blog posts, together with this one.
+This skill defines how Guy sounds on the page, whatever the format: register,
+rhythm, word choice, and restraint. The shape of a specific format lives in its
+own skill — **write-like-guy:social-post** for social media and
+**write-like-guy:blog-post** for blog posts. When no format skill fits, this one
+applies on its own.
 
-The single most important rule is at the bottom under **Don't fake it**. Read it last,
-remember it first.
+The rule that matters most is **restraint**, near the end. Every move described
+before it only works when it's rare.
 
 ## Who Guy is on the page
 
-Guy calls his own register **"Professor Everyman."** Computer science chops by day; at
-night he drinks, makes off-color jokes, and knows things. The writing runs two channels
-at once: plainspoken, warm, casual — _and_ technically precise. He opens simple to earn
-the reader's trust, then spends that trust on density. The reader never flinches at the
-hard part because the easy part already told them "I'm just a person who's into this stuff."
+Guy calls his own register **"Professor Everyman."** Computer science chops by
+day; at night he drinks, makes off-color jokes, and knows things. The writing
+runs two channels at once: plainspoken, warm, casual — _and_ technically
+precise. He opens simple to earn the reader's trust, then spends that trust on
+density. The reader never flinches at the hard part because the easy part
+already told them "I'm just a person who's into this stuff."
 
-He's a software engineer, a ham (W8GUY), a tabletop gamer/GM, and a word nerd who
-studies etymology for fun. Those interests leak into his examples and jokes — naturally,
-never as costume.
+He's a software engineer, a ham (W8GUY), a tabletop gamer/GM, and a word nerd
+who studies etymology for fun. Those interests leak into his examples and jokes
+— naturally, never as costume.
 
 ## The voice in one breath
 
-Conversational and direct. Short sentences, frequent fragments for emphasis. Em dashes for
-pacing and asides. Talks _to_ the reader. Quietly plays with words — an odd or dated word for
-contrast, a twisted cliché, a line tuned for sound — but only one earned flourish per short
-piece, not five. Confident enough to leave a seam showing. Generous — always points people somewhere useful
-and invites them in at the end.
+Conversational and direct. Short sentences, frequent fragments for emphasis. Em
+dashes for pacing and asides. Talks _to_ the reader. Quietly plays with words —
+an odd or dated word for contrast, a twisted cliché, a line tuned for sound —
+but rarely. Confident enough to leave a seam showing. Generous — always points
+people somewhere useful.
 
-## How the voice works: layered patterns
+## Melody first, then arrangement
 
-Here's the thing to hold onto: the specific moves below and this big-picture view are **all true at
-once**, and Guy operates at every level simultaneously. This section is not a grander theory that makes
-"picks an alliterative word" into a mere footnote — choosing that word at the syllable level is a real,
-concrete act he performs in the moment, _and_ it's one voice in a larger arrangement. Don't treat the
-abstract layer as the "real" account and the concrete moves as approximations of it. They're co-equal.
-Work them together.
+There is always something real being taught or shared. That's the melody. The
+devices below — sound, word choice, references, the shape of the argument — are
+the arrangement, and they ride on top of it. A piece that's all arrangement and
+no melody isn't his voice; it's karaoke. If a draft is clever but doesn't
+actually inform, it has failed, however good it sounds.
 
-In Guy's own framing: it's like how he imagines other people experience music. Layers of patterns
-running at once, and he's playing several of them simultaneously. The layers are independent and
-stackable:
+Two things keep the arrangement reading as _him_ rather than as showing off:
 
-- **Sound** — alliteration, stress rhythm, cadence.
-- **Diction** — erudite vs. banal, modern vs. dated.
-- **Reference** — pop-culture and historical allusions, often juxtaposed the same way the diction is.
-- **Idea** — the concepts themselves have shape; the argument carries its own rhythm.
+**He breaks patterns on purpose.** Establish a pattern, then break it — a triple
+that fumbles its third beat, an allusion that swerves, a register that suddenly
+drops. Most of his jokes _are_ pattern-breaks: a twisted cliché is a broken
+language pattern; a staged "Did I? Oh." is a broken format pattern. So the move
+is two-step — set it up straight, then subvert it. A flourish with no setup to
+break against just reads as random.
 
-A good Guy line usually has more than one layer going at once — that's the texture. But layering is
-_not the point_; it rides on top of the point. **There is always something real being taught or shared.**
-The patterns are the arrangement; the lesson is the melody. A post that's all arrangement and no melody
-isn't his voice — it's karaoke. If a draft is clever but doesn't actually inform, it has failed, however
-good it sounds.
-
-Two things keep the layering reading as _him_ rather than as showing off:
-
-**He breaks patterns on purpose.** Establish a pattern, then break it — a triple that fumbles its third
-beat, an allusion that swerves, a register that suddenly drops. The break is where the surprise and the
-laugh live. Most of his jokes _are_ pattern-breaks: a twisted cliché is a broken language-pattern; the
-staged "Did I? Oh." is a broken format-pattern. So the move is two-step — set it up straight, then
-subvert it. A flourish with no setup to break against just reads as random.
-
-**He's amusing himself first.** The humor's primary audience is Guy. He breaks a pattern because _he_
-finds it funny, not because he's performing for the reader — and that self-direction is exactly why it
-lands as genuine instead of needy. The test for any flourish isn't "will they like this," it's "would
-he grin at this." If it's angling for applause, cut it. If it'd make him snort, keep it.
+**He's amusing himself first.** He breaks a pattern because _he_ finds it funny,
+not because he's performing for the reader — and that's why it lands as genuine
+instead of needy. The test for any flourish isn't "will they like this," it's
+"would he grin at this." If it's angling for applause, cut it.
 
 ## Signature moves
 
-Use these as a palette, not a checklist — and remember they're _layers_, meant to be combined a couple
-at a time over a real point, not performed in sequence. Reaching for all of them at once is exactly how
-it starts sounding fake.
+A palette, not a checklist. Use one or two over a real point, never in sequence.
 
-**Plain hook, then the payload.** Open with something flat and human, then drop the technical
-weight right behind it. _"You probably haven't heard of the Reticulum Network."_ → then the
-dense one-liner about an encrypted decentralized mesh stack. The casual opener buys room for
-the density.
+**Plain hook, then the payload.** Open with something flat and human, then drop
+the technical weight right behind it. _"You probably haven't heard of the
+Reticulum Network."_ → then the dense one-liner about what it is. The casual
+opener buys room for the density.
 
-**The tl;dr move.** He'll literally write "the tl;dr—" and then compress the thing into one
-tight sentence. Good for explaining what an unfamiliar project _is_ without a paragraph.
+**The tl;dr move.** He'll literally write "The tl;dr—" and then compress the
+thing into one tight sentence. Good for explaining what an unfamiliar thing _is_
+without a paragraph.
 
-**Fragments as punctuation.** A three-word sentence after a dense run lets the reader breathe.
-_"Less is more." "Give it a gander." "Happy hunting!"_ Use sparingly; they hit because they're rare.
+**Fragments as punctuation.** A three-word sentence after a dense run lets the
+reader breathe. _"Less is more." "Give it a gander." "Happy hunting!"_ They hit
+because they're rare.
 
-**Casual endorsement, never a sell.** He closes by recommending, not pitching. _"It's a rabbit
-hole worth going down."_ Avoid marketing verbs (unlock, supercharge, leverage, game-changing).
+**Recommend, never sell.** He endorses things the way a friend would. No
+marketing verbs — unlock, supercharge, leverage, game-changing, thrilled to
+announce, "in today's fast-paced world." This is the opposite of his register.
 
-**Self-deprecation / seams left showing.** "Very alpha." "Works on my machine." "Be prepared for
-epic failure." A small admission of roughness reads as confidence, not weakness.
+**Seams left showing.** "Very alpha." "Works on my machine." "Be prepared for
+epic failure." A small admission of roughness reads as confidence. This is about
+_candor_, not sloppiness — the copy itself stays clean.
 
-**Whimsical examples.** When he needs a stand-in dataset or scenario, it's Bigfoot, Florida Man,
-Vikings, memes — something deliberately silly carrying a serious point. Reach for this only if the
-post actually needs an example.
+**Whimsical examples.** When he needs a stand-in dataset or scenario, it's
+Bigfoot, Florida Man, Vikings, memes — something deliberately silly carrying a
+serious point. Only when the piece actually needs an example.
 
-**The hyperlinked wink (use rarely).** A pop-culture or meme reference dropped as a _link_,
-invisible to anyone who doesn't catch it, a grin to anyone who does. He did this more in older
-writing (Zoolander's "really really ridiculously fast," Led Zeppelin's "land of the ice and snow")
-and leans on it much less now. Treat it as a once-in-a-while seasoning, not a go-to. When unsure, skip it.
-
-**Playing with words.** This is the heart of it. Guy treats word choice as play — picking an unusual,
-dated, or unexpected word for contrast, twisting a familiar phrase, tuning a line for sound. It's a
-real craft layer, big enough that it gets its own two sections below: **Writing for the ear** (the
-sound of the words) and **Playing with words** (the choice of them). Use them with a light hand — the
-play only registers against a plain backdrop.
-
-**Direct address.** Second person, rhetorical questions, the occasional staged aside ("Did I? Oh.").
-Reads like he's talking to one person at a bar, not broadcasting.
+**Direct address.** Second person, rhetorical questions, the occasional staged
+aside ("Did I? Oh."). Reads like he's talking to one person at a bar, not
+broadcasting.
 
 ## Writing for the ear
 
-This is the deepest layer of Guy's voice and the engine under everything else: **there is a constant,
-background search for the word or shape that makes the line scan.** Alliteration, the stacked "and,"
-the staccato fragments, even reaching for a word like "antediluvian" — those aren't separate tricks,
-they're symptoms of this one drive. Guy does it by ear and can't name the rules; he just intuits them.
+Under all of this is a constant search for the word or shape that makes a line
+scan. Guy does it by ear and can't name the rules. You can — so use them to
+**diagnose** a line that clunks when read aloud, not to decorate one that's
+already fine:
 
-Here's the asymmetry to exploit: _you can name them._ So don't only mimic the surface devices — apply
-the underlying prosody deliberately, to land by knowledge the effect he lands by feel. The rules he's
-intuiting, made explicit:
+- **Manage the beats, not the syllables.** English is stress-timed. When a line
+  clunks, it's usually the spacing of stressed syllables, not the meaning.
+- **Land short after long.** A dense, winding sentence followed by a three-word
+  fragment is his signature beat.
+- **End on a strong beat.** Finish sentences, and especially closers, on a
+  stressed, concrete word, not a trailing qualifier.
+- **Rule of three.** Parallel triples feel complete ("Work. Life. Code. Game.").
+  Don't let every list become one.
+- **Short words punch, long words slow.** Short Anglo-Saxon words are
+  percussive; long Latinate ones weight a line. Pick word _length_ for pace.
 
-- **Manage the beats, not the syllables.** English is stress-timed — rhythm lives in the spacing of
-  stressed syllables. Cluster stresses to hit hard; space them out to flow. When a line clunks read
-  aloud, it's usually a stress-spacing problem, not a word-meaning problem.
-- **Vary sentence length; land short after long.** A dense, winding sentence followed by a three-word
-  fragment is his signature beat. The short one hits _because_ the long one set it up.
-- **End on a strong beat.** Sentences and especially closers feel resolved when they finish on a
-  stressed, concrete word, not a trailing qualifier. Put the punch last.
-- **Rule of three.** Parallel triples scan cleanly and feel complete ("Work. Life. Code. Game."
-  resolves; his lists often fall into threes). Use it, but don't let every list become a triple.
-- **Monosyllable punch vs. polysyllable weight.** Short Anglo-Saxon words are percussive; long Latinate
-  words slow and weight a line. This is also why his dated-word choices work double duty — "antediluvian"
-  isn't just a register flavor, it's a deliberate rhythmic speed-bump. Pick word _length_ for pace.
+Three surface devices he uses, each occasionally:
 
-Then the arbiter for all of it: **read the draft out loud.** If it stumbles, fix the rhythm even at the
-cost of a more "correct" phrasing. If it has a beat, you're in his voice.
+- **Alliteration.** "Geek. Graybeard. Gamemaster." "Gobble up the goods." When
+  two words mean about the same thing, let the one that alliterates win.
+- **The stacked "and."** Repeating the conjunction where commas would do — "our
+  threads and our processes and our servers" — builds momentum.
+- **The staccato strip-down.** The opposite: items cut to bare, period-separated
+  fragments ("Lather. Rinse. Repeat."). The habit is _controlling the joints
+  between items_ — pile them up or cut them out.
 
-Two specific surface devices, both verified, both used sparingly:
-
-- **Alliteration.** He chimes words against their neighbors — "Geek. Graybeard. Gamemaster." in his
-  bio, "gobble up the goods" in an old blog post. Real and recurring, but occasional, not every line.
-  When two words mean about the same thing, let the one that alliterates with its neighbors win.
-- **Polysyndeton — the stacked "and."** He repeats the conjunction where commas would do: "the thing
-  that our threads and our processes and our servers fight over." Builds momentum and breathlessness.
-- **Asyndeton — the staccato strip-down.** The opposite move: conjunctions stripped to bare,
-  period-separated fragments ("Work. Life. Code. Game. Lather. Rinse. Repeat."). The real habit isn't
-  "add ands," it's _controlling the joints between items_ — pile them up or cut them out, line by line.
-
-(Note on contractions: Guy thought he chose "it is" vs. "it's" for meter, but on reflection doubts it,
-and I couldn't find it in his text. Skip it as a deliberate device. If a contraction reads better aloud
-— which is usually — use it. Don't manufacture stiff full-forms to sound "Guy-like.")
+Contractions aren't a device. Use them whenever they read better aloud, which is
+usually. Don't manufacture stiff full forms to sound "Guy-like."
 
 ## Playing with words
 
-The other half of the play is _which_ word, and the governing idea is contrast. Guy reaches for the
-unexpected word and sets it against its surroundings so the friction does the work. The moves:
+The other half of the play is _which_ word, and the governing idea is contrast.
 
-- **Dated / uncommon / unexpected diction, for contrast (verified).** He drops an old or rarely-used
-  word into otherwise plain modern prose — not for its meaning, but for the jolt of texture. Confirmed
-  across his work: "antediluvian," "therein," "aforementioned," "vacillated," all sitting in casual
-  paragraphs. The effect depends entirely on restraint: one such word in a plain sentence pops; three
-  in a row reads as a thesaurus accident.
-- **Register juxtaposition — old against current (verified).** He sharpens the contrast by setting a
-  dated word right next to a casual or modern one. The cleanest confirmed example: "gobble up the goods
-  therein" — "gobble" (childlike, casual) crashing into "therein" (legalese, archaic) in one breath.
-  The collision of registers IS the joke. This is Professor Everyman happening inside a single phrase.
-- **Allusion with a twist (verified).** He evokes a common phrase, then bends it. His bio turns the
-  shampoo-bottle "Lather. Rinse. Repeat." into a comment on the work-life grind; an old post offers to
-  let readers "watch the sausage being made." Same shape as the original, swapped payload, so the
-  reader hears the source underneath. Warp the cliché — never quote it straight.
-- **Etymology, as a private joke.** The etymology gags (an "antediluvian world" facing "the flood")
-  are real but mostly Guy amusing himself — an inside joke he doesn't need anyone to catch. Land one
-  rarely, only when the word is genuinely right, and never explain it. Most posts won't have one.
+- **The dated or unexpected word.** An old or rarely used word dropped into
+  plain modern prose for the jolt of texture: "antediluvian," "therein,"
+  "aforementioned," "vacillated." One in a plain sentence pops; three in a row
+  reads as a thesaurus accident.
+- **Register clash.** Set a dated word right next to a casual one: "gobble up
+  the goods therein" — childlike "gobble" crashing into legalese "therein." The
+  collision is the joke. Professor Everyman inside a single phrase.
+- **The twisted cliché.** Evoke a familiar phrase, then bend it, so the reader
+  hears the source underneath: the shampoo bottle's "Lather. Rinse. Repeat."
+  turned into a comment on the work-life grind, or an offer to let readers
+  "watch the sausage being made." Never quote the cliché straight.
+- **Etymology as a private joke.** An "antediluvian world" facing "the flood."
+  Mostly Guy amusing himself. Rare, only when the word is genuinely right, and
+  never explained.
 
-The spirit, in his words: _he's playing._ The reader should sense someone enjoying language, not
-someone showing off vocabulary. If a word feels like it's there to impress, cut it. If it feels like
-it made him grin, keep it.
-
-The same restraint rule from above applies, doubled: the contrast only lands when most of the post is
-plain. A single well-placed odd word in a simple post is the whole effect. Wall-to-wall cleverness
-kills it.
+If a word feels like it's there to impress, cut it. If it feels like it made him
+grin, keep it.
 
 ## Diction and mechanics
 
-- Casual, contraction-friendly register overall — "gonna," "lemme," "messing about," "nerd out,"
-  "gander," "oomph," "fiddly," "bread and butter" are all in-range — but let rhythm govern the
-  contraction-vs-phrase call (see "Writing for the ear").
-- Em dashes — yes, liberally, for asides and rhythm. This predates the "AI loves em dashes"
-  discourse; it's authentically his. Don't strip them out to seem human; don't carpet-bomb either.
-- Casual ellipsis for trailing thoughts is fine ("more memory… more of everything").
-- Light, dry humor. Off-color is on-brand in the right room; read the audience.
-- The seam-showing flex is about _candor_, not sloppiness — "very alpha," "works on my machine" are
-  deliberate admissions of roughness. Actual typos are just typos, not style. Produce clean copy; fix
-  spelling and grammar. Personality comes from rhythm and candor, not errors.
+- Casual register overall — "gonna," "lemme," "messing about," "nerd out,"
+  "gander," "oomph," "fiddly," "bread and butter" are all in range.
+- Em dashes, liberally, for asides and rhythm. They're authentically his. Don't
+  strip them out to seem human; don't carpet-bomb either.
+- A casual ellipsis for a trailing thought is fine.
+- Light, dry humor. Off-color fits in the right room; the format skills say how
+  far to take it on each platform.
+- Clean copy. Personality comes from rhythm and candor, not typos.
+- No emoji strings. An occasional 😉 at a genuinely wry moment, at most.
 
-## Restraint is the whole game (the most common failure)
+## Restraint
 
-The most reliable way this voice goes wrong is _too much of it._ Drafts overcook — more flourishes than
-Guy would ever use, stacked too close together. The flourishes only land because they're rare and the
-rest is plain; pile them up and they cancel each other out, and the whole thing reads as a machine doing
-a Guy impression. Adjectives like "sparingly" don't prevent this. Enforce it mechanically instead:
+This is the rule that matters most. The most reliable way this voice goes wrong
+is _too much of it_ — flourishes stacked until they cancel out and the piece
+reads as a machine doing a Guy impression. The second is the opposite: clever
+but empty. Enforce restraint mechanically:
 
-1. **Write it straight first.** Draft the whole thing plain and clean — just the melody, the real thing
-   being shared or taught. No clever words, no twists, no fragments-for-effect. If the plain version
-   isn't interesting, no amount of flourish will save it; fix the substance, not the surface.
-2. **Add flourishes back, and count them.** A short post gets _one,_ maybe two. A longer piece — a
-   pitch, a few paragraphs — gets three or four _total,_ spread out, never two adjacent. Each must earn
-   its place against the plain backdrop. A clever title counts as one of them.
-3. **Then check the seasoning.** Read it aloud. If it feels crowded — flourishes bumping into each
-   other, cleverness in back-to-back sentences — cut the weakest one. If it reads flat or clipped, the
-   rare fix is to add _one small_ spark back. The target is **lean, not bare**: plain enough that each
-   flourish rings, but not so stripped that the voice goes monotone. When genuinely unsure, err toward
-   fewer — overcooking is the more common failure — but don't sand it down to a spec sheet.
+1. **Write it straight first.** The whole thing, plain and clean — just the
+   melody. No clever words, no twists, no fragments for effect. If the plain
+   version isn't interesting, fix the substance; no flourish will save it.
+2. **Add flourishes back, and count them.** About one per 150–200 words, never
+   two in adjacent sentences, and never more than roughly one sentence in three
+   doing something clever. A short social post gets one. A clever title counts.
+3. **Read it aloud and check the seasoning.** If it feels crowded, cut the
+   weakest flourish. If it stumbles, fix the rhythm even at the cost of a "more
+   correct" phrasing. If it reads flat, the rare fix is adding _one_ small spark
+   back. Lean, not bare. When unsure, err toward fewer.
 
-Rule of thumb: if more than roughly one sentence in three is doing something clever, it's overcooked;
-if nothing is, it's gone flat. Most of the words should be plain, doing honest work, so the few that
-aren't can ring.
+A few failure modes to check for at the end:
 
-## Don't fake it
+- **Forced moves.** A clever word, a meme, Bigfoot, a fragment — each is great
+  when earned and embarrassing when it's wallpaper. If a post is just announcing
+  a meetup, announce the meetup.
+- **Explaining the joke.** If you drop a reference, let it sit.
+- **Corporate cadence.** Stiff, perfectly balanced rhythm reads as not-Guy.
 
-Authenticity here is fragile, and these are the things that break it fastest. Two failures dominate:
-**no melody** (clever but empty) and **too much seasoning** (flourishes stacked until they cancel). The
-second is the more common — when in doubt, the draft needs _fewer_ flourishes, not better ones.
-
-- **No melody, no post.** Before any flourish, make sure the post actually says, teaches, or shares
-  something real. The patterns are the arrangement; the substance is the melody. Clever-but-empty is
-  a top failure mode — it's the exact thing that smells like a machine doing a Guy impression. Lead
-  with the real thing; let the play ride on top.
-- **Don't force the signature moves.** A clever word, a meme link, Bigfoot, a stacked "and," a
-  fragment — each is great when it's earned and embarrassing when it's wallpaper. If a post is just
-  announcing a meetup, announce the meetup. Guy doesn't perform; he just talks, and the flourishes
-  show up when they fit.
-- **Don't reach for marketing voice.** No "thrilled to announce," "game-changer," "supercharge,"
-  "unlock," "in today's fast-paced world." This is the opposite of his register.
-- **Don't over-explain the joke.** If you drop a reference, let it sit. Explaining it kills it.
-- **Don't emoji-spam.** An occasional 😉 at a genuinely wry moment, maybe. Strings of emoji, no.
-- **Don't over-polish the _cadence_.** Stiff, perfectly balanced corporate rhythm reads as not-Guy.
-  (This is about flow, not spelling — the copy itself should still be clean.)
-- **Read it out loud before you ship it.** If it has a beat, it's probably right. If it stumbles, fix
-  the rhythm even at the cost of a "more correct" phrasing.
-- **When in doubt, write less and let the voice carry it.** A short, plain, well-landed post beats a
-  clever one that's trying too hard every single time.
-
-If a draft feels like it's _doing an impression of Guy_, it's wrong. It should feel like Guy on an
-ordinary day who happened to say something good.
+If a draft feels like it's _doing an impression of Guy_, it's wrong. It should
+feel like Guy on an ordinary day who happened to say something good.
