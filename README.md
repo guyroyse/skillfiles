@@ -4,24 +4,6 @@ My personal collection of skills. Built on the [Agent Skills](https://agentskill
 
 ## Skills
 
-### TTRPG Tools
-
-Skills for tabletop role-playing game enthusiasts.
-
-- **[ttrpg-campaign-generator](skills/ttrpg-tools/ttrpg-campaign-generator)**:
-  Generates creative campaign ideas by randomly combining player types, plot
-  structures, villain archetypes, and settings inspired by famous books,
-  movies, and shows.
-- **[downcrawl-generator](skills/ttrpg-tools/downcrawl-generator)**:
-  Generates Folk (the strange peoples of the underworld) and Volumes (the
-  places worth journeying to) using the random tables from
-  [Downcrawl](https://downcrawl.textories.com/) by Aaron A. Reed (CC BY 4.0;
-  see the skill's
-  [LICENSE.md](skills/ttrpg-tools/downcrawl-generator/LICENSE.md)).
-- **[npc-generator](skills/ttrpg-tools/npc-generator)**: Generates
-  non-player characters by rolling on random tables and weaving the results
-  into a cohesive character.
-
 ### Be Like Guy
 
 Skills that encode my personal style for writing and coding.
@@ -52,7 +34,7 @@ gh skill install guyroyse/skillfiles
 Install a specific skill:
 
 ```sh
-gh skill install guyroyse/skillfiles ttrpg-campaign-generator --agent claude-code --scope user
+gh skill install guyroyse/skillfiles write-like-guy --agent claude-code --scope user
 ```
 
 Preview before installing (always a good idea):
@@ -72,16 +54,15 @@ npx skills add guyroyse/skillfiles
 Install a specific skill:
 
 ```sh
-npx skills add guyroyse/skillfiles --skill ttrpg-campaign-generator
+npx skills add guyroyse/skillfiles --skill write-like-guy
 ```
 
 ### Claude Code Plugin Marketplace
 
-Add the marketplace, then install one or both plugins:
+Add the marketplace, then install the plugin:
 
 ```sh
 claude plugin marketplace add guyroyse/skillfiles
-claude plugin install ttrpg-tools@guys-skills
 claude plugin install be-like-guy@guys-skills
 ```
 
@@ -89,13 +70,11 @@ Or from inside Claude Code:
 
 ```
 /plugin marketplace add guyroyse/skillfiles
-/plugin install ttrpg-tools@guys-skills
 /plugin install be-like-guy@guys-skills
 ```
 
 Skills installed via the plugin marketplace are namespaced, so you invoke them
-as `/ttrpg-tools:ttrpg-campaign-generator` and `/be-like-guy:write-like-guy`.
-
+as `/be-like-guy:write-like-guy`.
 
 ## Making Skills Trigger Automatically
 
