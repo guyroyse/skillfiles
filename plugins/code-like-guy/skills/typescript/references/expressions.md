@@ -58,8 +58,7 @@ Your order has shipped.`
 const message = [`Hello, ${name}.`, 'Your order has shipped.'].join('\n')
 ```
 
-`dedent` only has a default export, so it's an exception to the named-imports
-rule.
+`dedent` only has a default export, so it's imported as a default.
 
 ## IDs
 
@@ -85,11 +84,18 @@ Always assign regexes to a named variable before using them. An inline regex in
 a `.match()` / `.test()` / `.replace()` call forces the reader to decode the
 pattern in their head. A named variable communicates _intent_.
 
-```ts
-/* Yes */
-const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-if (validEmail.test(input)) { ... }
+At module level, a regex is a C-style constant and gets yelly case. Inside a
+function, it's camelCase.
 
+```ts
+/* Yes, at module level */
+const VALID_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+function isEmail(input: string) {
+  return VALID_EMAIL.test(input)
+}
+
+/* Yes, inside a function */
 const trailingWhitespace = /\s+$/
 const trimmed = line.replace(trailingWhitespace, '')
 
@@ -106,8 +112,9 @@ regex itself is doing too much.
 
 Use dot access whenever the property name is a valid identifier. Reach for
 bracket access only when the key is dynamic, contains characters that aren't
-valid in an identifier, or comes from a `Record<string, ...>` where TypeScript's
-strict index-access rules force it.
+valid in an identifier, or belongs to an index signature (such as a
+`Record<string, ...>`) in a project with `noPropertyAccessFromIndexSignature`
+on, which forces brackets.
 
 ```ts
 /* Yes */
@@ -139,8 +146,8 @@ const maxAttempts = options.maxAttempts ?? DEFAULT_OPTIONS.maxAttempts
 const baseDelay = options.baseDelay ?? DEFAULT_OPTIONS.baseDelay
 ```
 
-The same applies to imports (use named imports — see above) and array unpacking
-when it improves clarity.
+The same applies to imports (use named imports — see [modules.md](modules.md))
+and array unpacking when it improves clarity.
 
 ## Small syntactic preferences
 
@@ -160,24 +167,27 @@ if (!user) {
 }
 ```
 
-**When a one-line `if` body wraps to a second line, separate consecutive ifs
-with a blank line.** A one-line if where the body had to break (because of the
-80-char limit) visually blends into the next statement without a blank line
-between them.
+**When a one-line `if` body wraps to a second line, follow it with a blank
+line.** A one-line if where the body had to break (because of the 80-char limit)
+visually blends into whatever statement comes next — another `if` or anything
+else — without a blank line between them.
 
 ```ts
 /* Yes */
 if (typeof object.email !== 'string')
   throw new Error('missing or invalid field: email')
 
-if (!validEmail.test(object.email))
+if (!VALID_EMAIL.test(object.email))
   throw new Error(`invalid email: ${object.email}`)
+
+return object.email
 
 /* No */
 if (typeof object.email !== 'string')
   throw new Error('missing or invalid field: email')
-if (!validEmail.test(object.email))
+if (!VALID_EMAIL.test(object.email))
   throw new Error(`invalid email: ${object.email}`)
+return object.email
 ```
 
 **Exception: `if`/`else` always uses braces on both branches.** The moment

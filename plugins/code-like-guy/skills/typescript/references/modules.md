@@ -54,6 +54,11 @@ contents start serving distinct concerns, split it.
   hide what's actually used; named imports make the file's real dependencies
   obvious from the top of the file.
 
+  Use a default import only when the module has nothing else to import: a
+  default-only package (`import dedent from 'dedent'`,
+  `import express from 'express'`) or a local file whose primary export is
+  `export default`. Don't invent named imports a module doesn't have.
+
   ```ts
   /* Yes */
   import { createServer, Server } from 'net'
@@ -75,11 +80,25 @@ contents start serving distinct concerns, split it.
 - **Path aliases (`@foo`) when going _up_ the hierarchy.** When the import would
   otherwise need `../` (one or more), use a path alias instead. Siblings and
   descendants stay relative (`./sibling`, `./child/thing`).
+- If the project uses path aliases but has none for the directory you're
+  importing from, add one — to `tsconfig.json`'s `paths` and to whatever
+  resolves them at runtime (the bundler config, or `imports` in `package.json`).
+  If the project isn't set up for path aliases at all, use `../`.
 - Prefer `@foo` style aliases over `@/foo` style. The leading-slash variant is
   fine when a project's tsconfig already uses it, but new configs should drop
   the slash.
 - Use `import type { ... }` when importing only types — it's a small thing but
-  it's the right signal.
+  it's the right signal. When a module supplies both types and values, write two
+  statements rather than inline `type` modifiers.
+
+  ```ts
+  /* Yes */
+  import type { Server, Socket } from 'net'
+  import { createServer } from 'net'
+
+  /* No */
+  import { createServer, type Server, type Socket } from 'net'
+  ```
 
 ### Within-file layout
 

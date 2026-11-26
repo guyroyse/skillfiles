@@ -2,15 +2,54 @@
 
 Detailed examples for the naming rules in [SKILL.md](../SKILL.md).
 
+## Contents
+
+- Naming: the base conventions
+- C-style constants
+- The acronym rule
+- `ID`
+- Names from outside code
+- Booleans
+- No abbreviations
+
 ## Naming
 
 The base conventions are standard:
 
 - **Variables, functions, parameters, properties**: `camelCase`
-- **Classes, types, enum names**: `PascalCase`
-- **True constants and enum members**: `SCREAMING_SNAKE_CASE` ("yelly case")
+- **Classes, types, enum names, React components**: `PascalCase`
+- **C-style constants and enum members**: `SCREAMING_SNAKE_CASE` ("yelly case")
 - **File names**: `kebab-case`, always lowercase, no exceptions
-  (`tcp-processor.ts`, not `TCPProcessor.ts` or `tcpProcessor.ts`)
+  (`tcp-processor.ts`, not `TCPProcessor.ts` or `tcpProcessor.ts`). React
+  component files too: `UserCard` lives in `user-card.tsx`.
+
+Code examples in this skill are inside a function unless they say otherwise.
+
+### C-style constants
+
+A `const` outside any class or function that holds a fixed value — a literal, a
+regex, a lookup table — is yelly case. Inside a class or function, a `const`
+follows the ordinary rules, even when it holds the same kind of value.
+
+```ts
+/* Yes */
+const MAX_ATTEMPTS = 3
+const VALID_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const DEFAULT_OPTIONS = { maxAttempts: MAX_ATTEMPTS, baseDelay: 100 }
+
+function retry(task: () => Promise<void>) {
+  const startTime = Date.now()
+  ...
+}
+
+/* No */
+const maxAttempts = 3 /* module level: should be MAX_ATTEMPTS */
+
+function retry(task: () => Promise<void>) {
+  const START_TIME = Date.now() /* inside a function: should be startTime */
+  ...
+}
+```
 
 ### The acronym rule (the distinctive one)
 
@@ -58,6 +97,32 @@ const hostNameTCP = 'localhost'
 class ProcessesTCP {}
 ```
 
+### `ID`
+
+When it means "identification" — the word that's written ID in English — `ID`
+follows the acronym rule.
+
+```ts
+/* Yes */
+const userID = ulid()
+const userID_Map = new Map<string, User>()
+const idGenerator = createGenerator()
+class ID_Generator {}
+
+/* No */
+const userId = ulid()
+class IdGenerator {}
+```
+
+A bare `id`, such as a field or parameter, stays lowercase — it's a camelCase
+identifier that starts with the acronym.
+
+### Names from outside code
+
+Names that come from a platform, library, or external API (`innerHTML`,
+`toJSON`, `XMLHttpRequest`, a JSON field named `user_id`) are used exactly as
+they are. These rules apply to the names you choose, not the ones you consume.
+
 ### Booleans
 
 No mandatory prefix. Sometimes `is`/`has` reads well, sometimes a natural
@@ -68,6 +133,10 @@ noun-phrase does. Pick whichever reads more clearly in context.
 Spell identifiers out. `object`, not `obj`. `record`, not `rec`. `error`, not
 `err`. `request`, not `req`. `response`, not `res`. The few characters saved
 aren't worth the cognitive tax of decoding short forms — and modern editors
-autocomplete the full word in a keystroke or two anyway. Use established
-acronyms (`tcp`, `http`, `url`, `id`) — those aren't abbreviations of words,
-they _are_ the words.
+autocomplete the full word in a keystroke or two anyway.
+
+The test for an abbreviation: would it take a period in prose? "Obj." and "req."
+would, so they're out. `config`, `app`, `arg`, and `param` wouldn't — they're
+words in their own right, so they're fine. Established acronyms (`tcp`, `http`,
+`url`, `ID`) are fine too — those aren't abbreviations of words, they _are_ the
+words.

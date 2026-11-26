@@ -55,15 +55,24 @@ TypeScript is the goal, not type-level pyrotechnics.
 
 The `#name` private-field syntax is the preferred way to declare class-private
 state. The `private` keyword is a compile-time-only check; `#` is genuine
-runtime privacy and reads cleaner. Reserve `private` for cases where you
-specifically need declaration merging or compatibility with code that can't use
-`#`.
+runtime privacy and reads cleaner. Reserve `private` for cases where `#` can't
+work:
+
+- The compile target is below ES2015, which TypeScript can't downlevel `#` to.
+- The object gets wrapped in a `Proxy`. Methods called through the proxy can't
+  reach `#` fields and throw.
+- A framework or library needs to see the field, such as a decorator, an ORM, or
+  a serializer that reflects on properties.
 
 ```ts
 /* Yes */
 class Connection {
   #socket: Socket
-  #isOpen: boolean
+  #isOpen = false
+
+  constructor(socket: Socket) {
+    this.#socket = socket
+  }
 
   open() {
     this.#socket.connect()
@@ -78,12 +87,16 @@ class Connection {
 }
 ```
 
-### Declare fields in the class body, assign explicitly in the constructor
+### Declare fields in the class body
 
 Don't use TypeScript's parameter property shorthand (where the constructor
 signature declares fields by adding modifiers). It's compact but it hides the
 field list. Declaring members in the class body makes the shape of the class
 obvious at a glance.
+
+A field with a fixed starting value gets an initializer on its declaration
+(`#isOpen = false`). A field whose value comes from the caller is assigned
+explicitly in the constructor.
 
 ```ts
 /* Yes */
@@ -135,6 +148,22 @@ function findUser(id: string): User | undefined {
 When the language forces `undefined` (optional parameters, optional properties),
 that's fine — don't fight it. The rule is about _deliberate_ absences in return
 values and assignments.
+
+The same goes for built-ins that return `undefined` when nothing is found, like
+`Array.find` and `Map.get`. Not found is what `undefined` means, so pass the
+result through as-is rather than converting it with `?? null`.
+
+```ts
+/* Yes */
+function findActiveUser(users: User[]): User | undefined {
+  return users.find(user => user.isActive)
+}
+
+/* No */
+function findActiveUser(users: User[]): User | null {
+  return users.find(user => user.isActive) ?? null
+}
+```
 
 ## Error handling
 
