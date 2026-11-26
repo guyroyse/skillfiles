@@ -18,9 +18,10 @@ code Guy would write by hand. The rules below are the ones that distinguish his
 code from generic TypeScript — follow every one of them. Where this skill is
 silent, fall back to idiomatic modern TypeScript.
 
-The principles that hold in any language — the rule of three, duplication,
-naming, comments, and file layout — come from **code-like-guy:style**. Load it
-first; this skill assumes it and covers only what's specific to TypeScript.
+The principles that hold in any language — the rule of three, naming, comments,
+and file layout — come from **code-like-guy:style**. Load it first; this skill
+assumes it and covers only what's specific to TypeScript. Design and
+architecture come from **code-like-guy:design**.
 
 Every rule is stated here. Each section links to a reference file with fuller
 examples and edge cases; read it when a rule's application isn't obvious.

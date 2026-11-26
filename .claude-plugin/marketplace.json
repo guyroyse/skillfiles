@@ -16,7 +16,7 @@
     {
       "name": "code-like-guy",
       "source": "./plugins/code-like-guy",
-      "description": "Code like Guy — his coding style in any language, plus TypeScript.",
+      "description": "Code like Guy — his coding style and design principles in any language, plus TypeScript.",
       "category": "productivity"
     },
     {

@@ -1,23 +1,24 @@
 ---
 name: style
 description: >-
-  Guy Royse's general coding style — the principles that hold in any language:
-  his rule of three, how much duplication to tolerate and when to abstract,
-  objects versus data structures, naming, comments, and file layout. Use this
-  skill whenever writing, editing, refactoring, designing, or reviewing code for
-  Guy, in any language. For a language with its own skill, such as
+  Guy Royse's general coding style — how code reads in any language: his rule of
+  three for arguments, steps, and dependencies; naming; comments; and file
+  layout. Use this skill whenever writing, editing, refactoring, or reviewing
+  code for Guy, in any language. For a language with its own skill, such as
   code-like-guy:typescript, use both; the language skill covers syntax and
-  idioms. Inspired by Clean Code, but these are Guy's versions of the ideas, not
-  the book's.
+  idioms. When designing or restructuring how pieces fit together, also use
+  code-like-guy:design. Inspired by Clean Code, but these are Guy's versions of
+  the ideas, not the book's.
 ---
 
 # Guy's Coding Style
 
-This skill covers how Guy shapes code in any language: how big things get, when
-to remove duplication, how to name things, and what deserves a comment. The
-syntax and idioms of a specific language live in its own skill —
-**code-like-guy:typescript** for TypeScript. When a language skill exists, use
-both.
+This skill covers how Guy's code reads in any language: how big functions and
+classes get, how things are named, and what deserves a comment. The syntax and
+idioms of a specific language live in its own skill —
+**code-like-guy:typescript** for TypeScript. How the pieces of a codebase fit
+together — dependencies, duplication, abstraction, and architecture — lives in
+**code-like-guy:design**.
 
 These principles come from _Clean Code_, filtered through Guy's experience.
 Where this skill and the book disagree, this skill wins.
@@ -34,8 +35,9 @@ Most people can reason about three things at once. Guy sizes code to fit:
 - **No more than three arguments** to a function. Needing more is a sign that
   the function does too much, or that some of the arguments belong together as
   one thing.
-- **No more than three dependencies** for a function, class, or module — the
-  collaborators it has to know about to do its job.
+- **No more than three dependencies** for a function or class — the other
+  functions or classes it has to know about to do its job. A class uses at most
+  three other classes.
 - **About three steps per function**: a beginning, a middle, and an end — set
   up, do the work, produce the result. This is what Clean Code's "three to five
   lines" really means. Count steps, not lines. When a function has more steps
@@ -53,35 +55,8 @@ function placeOrder(cart: Cart, customer: Customer): Order {
 Three is a guide, not a hard limit. Exceed it only when splitting would make the
 code harder to follow, not just to save effort.
 
-## Duplication and abstraction
-
-- **Tolerate a little duplication.** Wait for three examples before removing it.
-  Two examples aren't enough to show what the pattern actually is. The third
-  shows what really varies and what stays the same.
-- **Bad abstractions are far worse than duplicated code.** Duplication costs
-  some typing and some care when changing things. A wrong abstraction bends
-  every caller to fit it and is hard to back out of.
-- **Don't write ARID code.** ARID stands for "ARID Really Isn't DRY": code
-  that's been de-duplicated so hard it's unintelligible. When removing
-  duplication makes the code harder to read, put the duplication back.
-- **Don't abstract away the performance.** Layers of indirection have a cost.
-  When abstraction makes code meaningfully slower, the abstraction is wrong.
-- **Look before you write.** Before writing a helper, search the codebase for
-  one that already exists. Duplicating code you didn't know about isn't the same
-  as tolerating duplication on purpose.
-
-## Objects and data structures
-
-There are two different ways to model things, and they solve different problems:
-
-- **Objects** hide their data and expose behavior. Adding a new kind of thing is
-  easy; adding a new operation across all of them is hard.
-- **Data structures** expose their data and have no behavior. Functions operate
-  on them. Adding a new operation is easy; adding a new kind of thing is hard.
-
-Pick the one that fits the problem, and don't mix the two in one type. An object
-with getters and setters for all its data is a data structure pretending to be
-an object.
+Splitting a function up is not the same as removing duplication across it. For
+when to pull repeated code into a shared abstraction, see code-like-guy:design.
 
 ## Naming
 

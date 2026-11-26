@@ -18,9 +18,12 @@ Skills that encode my personal style for note-taking.
 
 Skills for writing code in my style.
 
-- **[style](plugins/code-like-guy/skills/style)**: My coding style in any
-  language — the rule of three, when to remove duplication, objects versus data
-  structures, naming, and comments. The language skills build on it.
+- **[style](plugins/code-like-guy/skills/style)**: How my code reads in any
+  language — the rule of three, naming, comments, and file layout. The language
+  skills build on it.
+- **[design](plugins/code-like-guy/skills/design)**: How I fit the pieces
+  together — dependency limits, when to abstract, objects versus data
+  structures, SOLID, and keeping I/O out of business logic.
 - **[typescript](plugins/code-like-guy/skills/typescript)**: My TypeScript
   coding style — naming conventions, module structure, type-system idioms, class
   conventions, and syntactic preferences.
@@ -82,7 +85,8 @@ It doesn't need to be fancy:
 
 ```markdown
 When writing or editing code for me, use the code-like-guy:style skill. For
-TypeScript, use it along with code-like-guy:typescript.
+TypeScript, use it along with code-like-guy:typescript. When designing or
+restructuring code, also use code-like-guy:design.
 
 When writing a social media post or blog post for me, use the
 write-like-guy:voice skill along with write-like-guy:social-post or
