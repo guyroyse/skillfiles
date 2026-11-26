@@ -32,5 +32,5 @@ plugins/<plugin>/
 
 Files in this repo are formatted with Prettier (config at `.prettierrc`). The
 config applies to Markdown too — Prettier wraps lines at 80 chars. A
-`PostToolUse` hook in `.claude/settings.json` runs Prettier on any Markdown file
-Claude writes or edits.
+`PostToolUse` hook in `.claude/settings.json` runs Prettier on any file Claude
+writes or edits, skipping files Prettier doesn't support.
