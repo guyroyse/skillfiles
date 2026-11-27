@@ -27,6 +27,26 @@ Skills that encode my personal style for writing and coding.
   Operates within my Obsidian vault (Datacore) — reading, writing, routing,
   and maintaining notes the way I like them.
 
+### Chiastic Coding
+
+Skills for building or changing one unit of code (a class or function) from a
+spec, test first. The tests have to prove they're sufficient both before and
+after the change: every behavior verified, coverage as near 100% as practical,
+and mutation testing passed.
+
+- **[develop-unit](skills/chiastic-coding/develop-unit)**: The orchestrator.
+  Takes a spec and runs the whole workflow, dispatching the skills below.
+- **[assess-tests](skills/chiastic-coding/assess-tests)**: Decides whether a
+  unit's tests are sufficient and lists the gaps if they aren't.
+- **[characterize-unit](skills/chiastic-coding/characterize-unit)**: Pins down
+  what existing code currently does with characterization tests.
+- **[specify-unit](skills/chiastic-coding/specify-unit)**: Writes failing tests
+  from a spec's requirements.
+- **[implement-unit](skills/chiastic-coding/implement-unit)**: Makes failing
+  tests pass without touching them.
+- **[mutation-check](skills/chiastic-coding/mutation-check)**: Runs mutation
+  testing against a unit and explains each surviving mutant.
+
 ## Installation
 
 Skills can be installed using the GitHub CLI, the `npx skills` CLI, or the
@@ -68,12 +88,13 @@ npx skills add guyroyse/skillfiles --skill ttrpg-campaign-generator
 
 ### Claude Code Plugin Marketplace
 
-Add the marketplace, then install one or both plugins:
+Add the marketplace, then install whichever plugins you want:
 
 ```sh
 claude plugin marketplace add guyroyse/skillfiles
 claude plugin install ttrpg-tools@guys-skills
 claude plugin install be-like-guy@guys-skills
+claude plugin install chiastic-coding@guys-skills
 ```
 
 Or from inside Claude Code:
@@ -82,11 +103,11 @@ Or from inside Claude Code:
 /plugin marketplace add guyroyse/skillfiles
 /plugin install ttrpg-tools@guys-skills
 /plugin install be-like-guy@guys-skills
+/plugin install chiastic-coding@guys-skills
 ```
 
 Skills installed via the plugin marketplace are namespaced, so you invoke them
 as `/ttrpg-tools:ttrpg-campaign-generator` and `/be-like-guy:write-like-guy`.
-
 
 ## Making Skills Trigger Automatically
 

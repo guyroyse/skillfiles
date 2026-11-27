@@ -30,6 +30,18 @@
         "name": "Guy Royse"
       },
       "homepage": "https://github.com/guy-royse/skillfiles"
+    },
+    {
+      "name": "chiastic-coding",
+      "description": "Spec-driven, test-first development of a single unit of code, with a test sufficiency gate (behaviors, coverage, mutation testing) before and after the change.",
+      "source": "./",
+      "skills": ["./skills/chiastic-coding"],
+      "strict": false,
+      "category": "development",
+      "author": {
+        "name": "Guy Royse"
+      },
+      "homepage": "https://github.com/guy-royse/skillfiles"
     }
   ]
 }
