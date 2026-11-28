@@ -1,11 +1,18 @@
 {
   "name": "code-like-guy",
-  "description": "Code like Guy — his coding style and design principles in any language, plus TypeScript.",
+  "description": "Code like Guy — his coding style and design principles in any language, plus TypeScript, and agents for test-first development of units of code.",
   "author": {
     "name": "Guy Royse",
     "url": "https://github.com/guyroyse"
   },
   "homepage": "https://github.com/guyroyse/skillfiles",
   "repository": "https://github.com/guyroyse/skillfiles",
-  "keywords": ["coding", "style", "design", "typescript"]
+  "keywords": [
+    "coding",
+    "style",
+    "design",
+    "typescript",
+    "testing",
+    "characterization"
+  ]
 }

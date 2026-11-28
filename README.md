@@ -27,6 +27,17 @@ Skills for writing code in my style.
 - **[typescript](plugins/code-like-guy/skills/typescript)**: My TypeScript
   coding style — naming conventions, module structure, type-system idioms, class
   conventions, and syntactic preferences.
+- **[unit-tests](plugins/code-like-guy/skills/unit-tests)**: How I write unit
+  tests, which I call specs — test the permutations with zero, one, and many,
+  arrange/act/assert, names that read as sentences, test doubles for
+  dependencies, and named constants for test data.
+
+Agents:
+
+- **[unit-characterizer](plugins/code-like-guy/agents/unit-characterizer.md)**:
+  Pins down what an existing unit of code does today with characterization
+  tests, looping until the project's coverage and mutation thresholds pass. Says
+  so up front when a unit is unsuitable or needs seams approved.
 
 ### Write Like Guy
 
