@@ -66,6 +66,11 @@ Optional, from the caller:
   don't run, that a test expected to pass fails, or that a test is disputed.
   Fixing those tests is the work. Answer a dispute by fixing the test, or by
   explaining from the requirements why it stands.
+- **Answers:** in a later round, the answers to the questions from your last
+  `needs_clarification` report, and the tests it listed as already written. Add
+  the answers to the requirements, and carry on from those tests rather than
+  starting over. They're under revision, so they don't count against the
+  baseline.
 - **Existing tests:** other test files that already cover the unit, including
   characterization tests. They're writable, but only for the updates in step 4.
 - **Writable paths:** defaults to the test file and the unit's source file. The
@@ -87,9 +92,11 @@ a unit that's new), stop and report `invalid_input`.
 - **Don't implement.** The only code you write in the source is the minimum that
   lets the tests run, and it must not make them pass. If you find yourself
   making a test pass, stop.
-- **Never change existing code.** You may add declarations for things that don't
-  exist yet. You never edit an existing body or signature, even one that's
-  obviously wrong.
+- **Never change an existing body.** You may add declarations for things that
+  don't exist yet, and change an existing signature when the requirements change
+  it, such as a new parameter, or a result returned instead of thrown. Change
+  only the signature, doing the minimum that lets the code build, and list it.
+  You never edit an existing body, even one that's obviously wrong.
 - **Read the source only to place what you add.** You'll see some of the
   existing code when you add declarations to it. Don't let it decide an expected
   value.
@@ -97,8 +104,13 @@ a unit that's new), stop and report `invalid_input`.
   file needs to be built and run, such as an entry in a module list, a build
   file, a project file, or a header. Add only that entry, and list it in the
   report. Anything else outside the writable paths means `blocked`.
-- **Cap every retry loop.** If something you're fixing still fails after five
-  attempts, stop and report `error` with the last output.
+- **Never restore with version control.** Commands like `git checkout` or
+  `git stash` throw away uncommitted work that isn't yours. To undo a change,
+  save a copy first, in a scratch directory, and restore from it. Use version
+  control only to compare.
+- **Cap every retry loop.** If the same problem still isn't fixed after five
+  attempts, stop and report `error` with the last output. Each distinct problem
+  gets its own five.
 
 ## What counts as failing
 
@@ -112,6 +124,12 @@ including a not-implemented error from code you added. It **fails for the wrong
 reason** when the failure comes from the test itself, such as a typo, a missing
 import, or a test double that's set up wrong.
 
+**Something the test calls that doesn't exist is always the wrong reason,** in
+every language. In a compiled language, it stops the build. In a dynamic one, it
+shows up as a runtime error, such as a missing name or attribute, that the
+runner reports like any other failure. Either way, the declaration is yours to
+add, in step 5.
+
 **Confirm every test ran.** Check the output for each test you added or
 modified, by name or by count. A test that never ran is neither passing nor
 failing. Where the runner reports only an exit code, run the tests one at a time
@@ -124,8 +142,9 @@ or in small groups so you can tell.
 Load the code-like-guy unit-tests and style skills, and the skill for the unit's
 language if code-like-guy has one, with the Skill tool. If the Skill tool isn't
 available, read them directly from
-`${CLAUDE_PLUGIN_ROOT}/skills/<name>/SKILL.md`. If a skill can't be loaded
-either way, say so in the report. Follow them in every test you write.
+`${CLAUDE_PLUGIN_ROOT}/skills/<name>/SKILL.md`, or find that file with Glob, as
+`**/code-like-guy/**/skills/<name>/SKILL.md`. If a skill can't be loaded any of
+these ways, say so in the report. Follow them in every test you write.
 
 Read the requirements, the test file, and the existing tests. Read the unit's
 signatures and its collaborators' contracts, so you know what you're calling and
@@ -134,11 +153,13 @@ what test doubles have to stand in for.
 ### 2. Baseline
 
 If the unit has tests, run the build command, if there is one, and the test
-command. If anything fails, other than the tests under revision, stop and report
-`baseline_failed` with the relevant output. Specifying on top of failing tests
-makes every later result ambiguous.
+command, scoped to the test file and the existing tests. The rest of the
+project's tests aren't yours to run. If anything fails, other than the tests
+under revision, stop and report `baseline_failed` with the relevant output.
+Specifying on top of failing tests makes every later result ambiguous.
 
-In a revision, a build failure caused by the tests under revision is part of the
+The tests under revision are the ones named in a revision, and the tests already
+written that came back with answers. A build failure they cause is part of the
 work, not a baseline failure.
 
 ### 3. Plan
@@ -192,7 +213,8 @@ unit, as they stand, giving one of these reasons:
 
 If the requirements give no signatures, choose them, and record them as
 decisions. Whatever you choose becomes the contract the implementer codes
-against.
+against. If they change an existing signature, record the new one as a decision
+too.
 
 ### 4. Reconcile
 
@@ -203,6 +225,11 @@ Update each one to assert the new behavior. Remove any characterization marking,
 since it now records intent rather than history. Every update must trace to the
 requirements. List each one as a behavior change, with the old and new expected
 behavior, so whoever reviews the work can see exactly what's changing.
+
+When the requirements change a signature, existing tests that call it the old
+way won't build or run. Update those calls to the new signature, and nothing
+else about them. If a test's assertions would have to change too, that's a
+behavior change, and it must trace to the requirements like any other.
 
 Leave every other existing test as it is. Those are the safety net for the
 behavior that isn't supposed to change.
@@ -218,17 +245,23 @@ If you find a new question about outcome while writing, stop and report
 so the next round can pick up from there.
 
 Then run the build command, if there is one, and the test command. If the tests
-don't build or run because something they call doesn't exist yet, add the
-**minimum code that makes them run without passing**: the declarations the tests
-call, matching the contracts, with placeholder bodies. Nothing more. Don't add
-logic, don't branch, and don't touch anything that already exists.
+don't build or run because something they call doesn't exist yet, or has the old
+signature, add the **minimum code that makes them run without passing**: the
+declarations the tests call, and the signature changes the requirements make,
+matching the contracts, with placeholder bodies for anything new. Nothing more.
+Don't add logic, don't branch, and don't touch any existing body.
+
+A signature change can break callers of the unit. Fix the ones in the writable
+paths by the same minimum. If any are outside them, report `blocked`, naming
+each file and the edit it needs.
 
 For each placeholder, use a zero-like or empty value of the right type, such as
 zero, an empty string, an empty collection, or a body that does nothing. If no
 such value fails every test that expects failure, because the tests expect both
 `true` and `false`, for example, raise the language's not-implemented error
 instead. If the language has none that the runner reports per test, let the test
-the placeholder satisfies be expected to pass, and say why.
+the placeholder satisfies be expected to pass, and mark it in _Changed tests_ as
+passing only because of the placeholder.
 
 ### 6. Red
 
@@ -262,7 +295,10 @@ In a gap round, the code already exists, and probably already does what each gap
 describes. So each test you write for a gap is expected to pass. Specify it from
 the requirements, exactly as you would any other test, run it, and:
 
-- **If it passes,** mark it as expected to pass. No other reason is needed.
+- **If it passes,** check that it isn't too weak, the same way as in step 6:
+  change its expected value to something wrong, run it, and restore it. If it
+  still passes, strengthen it. Once it's sound, mark it as expected to pass. No
+  other reason is needed.
 - **If it fails for the right reason,** the implementation disagrees with the
   requirements. Mark it as expected to fail, with that as the reason.
 - **If it fails for the wrong reason,** fix the test.
@@ -284,7 +320,8 @@ Each status says what happened and what the caller does next.
 - **`baseline_failed`:** the unit's existing tests were failing before any work
   began. Next: fix the unit's existing state before trying again.
 - **`blocked`:** a test can't be written without touching a file outside the
-  writable paths. Next: widen the boundary.
+  writable paths. The report names each file and the edit it needs. Next: widen
+  the boundary.
 - **`invalid_input`:** a required input is missing or doesn't resolve. Next: fix
   the inputs.
 - **`error`:** something else went wrong, or a retry loop hit its cap. Next:
@@ -304,7 +341,8 @@ blocked | invalid_input | error
 
 For any status but `completed`: the reason code, if there is one
 (`multiple_units`, `combinatorial`, `needs_seam`), then the explanation or the
-relevant output.
+relevant output. For `blocked`, each file outside the writable paths and the
+edit it needs.
 
 ## Summary
 
@@ -326,8 +364,9 @@ know.
 
 ## Changed tests
 
-- <test name>: new | modified. Before implementation: fails | passes. <the
-  behavior it verifies, or why it already passes>
+- <test name>: new | modified. Before implementation: fails | passes | passes
+  only because of the placeholder. <the behavior it verifies, or why it already
+  passes>
 
 ## Behavior changes
 
@@ -335,7 +374,8 @@ know.
 
 ## Added code
 
-- <file>: <declarations or registration entries added, and their placeholders>
+- <file>: <declarations or registration entries added, signatures changed, and
+  their placeholders>
 
 ## Coverage of the requirements
 

@@ -36,8 +36,10 @@ Required:
 Commands come from the caller. If the caller leaves one out, find it from the
 project's build files, scripts, and existing tests, and say in the report which
 command you used. Never build a check command yourself: use one the caller gives
-or the project already has. If there's no way to run the tests at all, stop and
-report `invalid_input`.
+or the project already has. Scoping a command the project has, by filling in the
+tool's documented options for files or paths, isn't building one. If a found
+check command can't be scoped that way, treat it as missing, and say so. If
+there's no way to run the tests at all, stop and report `invalid_input`.
 
 - **Test command:** runs the unit's test file and exits 0 when the tests pass.
   Required, but found if the caller leaves it out.
@@ -48,7 +50,9 @@ report `invalid_input`.
   say in the report that nothing measured how well the tests pin the unit. If it
   covers coverage only, say that mutation testing wasn't part of the check.
 - **Type check command:** runs the compiler or type checker. Optional, but use
-  it after every seam change when the project has one.
+  it after every seam change when the project has one. Without one, in a
+  language the test command compiles, the test command's build is the type
+  check.
 
 Optional, from the caller:
 
@@ -56,13 +60,18 @@ Optional, from the caller:
   techniques.
 - **Round cap:** how many times to run the check command, counting the first.
   Defaults to 5.
+- **Check time limit:** how long one run of the check command may take. Defaults
+  to one hour.
 - **Approved seams:** seams the caller has approved after an earlier
   `needs_approval` report, each as the full entry from that report: technique,
-  location, and change. If one no longer matches the source, report
-  `invalid_input`.
+  location, and change. If one no longer matches the source, or needs a file
+  outside the writable paths, report `invalid_input`.
 - **Accepted limitations:** behaviors the caller has agreed to pin only partly,
   after an earlier `unsuitable` report, with the stable properties to pin
   instead.
+- **Existing tests:** other test files that exercise the unit. Read them for
+  ideas, and for how the unit's collaborators really behave. They're read-only,
+  and don't count toward the check.
 - **Writable paths:** the files you may modify. Defaults to the test file. The
   unit's source is writable only if it's listed here.
 
@@ -91,8 +100,13 @@ report `invalid_input`. Don't go looking for substitutes.
 - **The unit's own test file is its safety net.** The check command runs only
   that file. Tests elsewhere that happen to exercise the unit don't count,
   though you may read them for ideas.
-- **Cap every retry loop.** If something you're fixing still fails after five
-  attempts, stop and report `error` with the last output.
+- **Never restore with version control.** Commands like `git checkout` or
+  `git stash` throw away uncommitted work that isn't yours. To undo a change,
+  save a copy first, in a scratch directory, and restore from it. Use version
+  control only to compare.
+- **Cap every retry loop.** If the same problem still isn't fixed after five
+  attempts, stop and report `error` with the last output. Each distinct problem
+  gets its own five.
 - **Leave your work in place when you stop,** whatever the status. Seams that
   passed the build and tests you've written stay, and the report lists them.
 
@@ -168,13 +182,14 @@ never would pins behavior for a situation that can't happen.
 Skip this step if no seams are needed.
 
 Apply each approved or pre-approved seam, one at a time, following _Seam
-techniques_. Save the original text before each one, so you can undo it exactly.
-After each one, run the type check command if there is one:
+techniques_. Save a copy of the file before each one, so you can undo it
+exactly. After each one, run the type check:
 
 - **Errors in the seam's own lines:** fix them.
 - **Errors anywhere else,** such as a caller that no longer fits: the seam isn't
-  mechanical after all. Undo it, and report it under `needs_approval`, with what
-  broke.
+  mechanical after all. Undo it, and carry on with the rest, so the report
+  covers every seam at once. Then report each one that broke under
+  `needs_approval`, with what broke.
 - **A problem you can't fix within the writable paths:** undo every seam you've
   made, and report `blocked`.
 
@@ -185,10 +200,11 @@ the report, so they know to.
 ### 4. Survey and pin
 
 List the behaviors to pin across the unit's whole public surface, following
-"What to test" in the code-like-guy unit-tests skill: the permutations of the
-dimensions you found in step 2, every entry point and branch, and especially
-input the code doesn't handle at all, since mutation testing can't find gaps in
-code that doesn't exist. Skip behaviors the test file already pins.
+"What to test" in the code-like-guy unit-tests skill: each case of every
+dimension you found in step 2, the combinations of the dimensions that interact,
+every entry point and branch, and especially input the code doesn't handle at
+all, since mutation testing can't find gaps in code that doesn't exist. Skip
+behaviors the test file already pins.
 
 Observe them by running them, all at once:
 
@@ -200,10 +216,17 @@ Observe them by running them, all at once:
    pass.
 
 Not every failure shows the actual value. Some asserts only report that they
-failed, and some types don't print. When that happens, find the value another
-way: a temporary print in the test, or a scratch program that calls the unit.
-Remove the print once you have the value. If one compile error or one failure
-stops the whole run, work in smaller batches.
+failed, some types don't print, and many runners round floating-point numbers or
+cut off large structures. When that happens, find the full value another way: a
+temporary print in the test, or a scratch program that calls the unit. Remove
+the print once you have the value. If one compile error or one failure stops the
+whole run, work in smaller batches.
+
+If a test fails on the second run, with a value different from the one you read,
+the behavior isn't deterministic, whatever the assessment found. Remove the
+test, and list the behavior under _Nondeterministic behaviors_, with the stable
+properties you could pin instead, if any. Name it in the summary, so the caller
+can rerun you with accepted limitations.
 
 Observe errors, whether raised, thrown, or returned, and calls recorded by spies
 the same way. A scratch script or REPL is fine for probing complex output, but
@@ -221,10 +244,14 @@ the last run in step 4 is final, so go to step 6. The survey is all you have, so
 make it thorough.
 
 Run the check command. Mutation testing can be slow, so if it might outlast the
-command time limit, run it in the background and wait for it. If it fails
-without reporting coverage or mutation results, because the tool crashed, is
-missing, or timed out, stop and report `error` with the output. If it passes, go
-to step 6.
+command time limit, run it in the background and wait for it, up to the check
+time limit. If it fails without reporting coverage or mutation results, because
+the tool crashed, is missing, or ran past the limit, stop and report `error`
+with the output.
+
+If it passes, go to step 6. A passing check means the unit is pinned well
+enough, even if some lines or mutants in it are still uncovered or alive. The
+thresholds are the project's call, not yours.
 
 Otherwise, read which lines and branches are uncovered and which mutants
 survived. Tools usually report on whole files, so only what's inside the unit
@@ -250,7 +277,9 @@ be dead code worth deleting, which is the caller's call.
 Each run of the check command is one round. Stop when the check passes, when
 everything left is equivalent, unreachable, or out of scope, or when you reach
 the round cap. If the check still fails, report `insufficient`, separating what
-you believe is equivalent or unreachable from the gaps you couldn't close.
+you believe is equivalent or unreachable from the gaps you couldn't close. The
+reason is `round_cap` if any gaps are left, and `only_unreachable` if everything
+left is equivalent, unreachable, or out of scope.
 
 ### 6. Finish
 
@@ -460,8 +489,9 @@ reassigned.
 Before writing any tests, load the code-like-guy unit-tests and style skills,
 and the skill for the unit's language if code-like-guy has one, with the Skill
 tool. If the Skill tool isn't available, read them directly from
-`${CLAUDE_PLUGIN_ROOT}/skills/<name>/SKILL.md`. If a skill can't be loaded
-either way, say so in the report. Follow them, with these additions for
+`${CLAUDE_PLUGIN_ROOT}/skills/<name>/SKILL.md`, or find that file with Glob, as
+`**/code-like-guy/**/skills/<name>/SKILL.md`. If a skill can't be loaded any of
+these ways, say so in the report. Follow them, with these additions for
 characterization:
 
 - **Mark them as characterization tests,** using the project's convention if
@@ -486,10 +516,11 @@ Each status says what happened and what the caller does next.
   `combinatorial`, `untestable_dependency`, or `uncontrollable_nondeterminism`.
   Next: split the unit or break the dependency, or rerun with accepted
   limitations to pin only the stable properties.
-- **`insufficient`:** the check still fails after the last round, or only
-  equivalent and unreachable items keep it from passing. Next: review what's
-  left. Equivalent survivors and unreachable code may be acceptable as they are,
-  and real gaps need another pass or a person.
+- **`insufficient`:** the check still fails after the last round (`round_cap`),
+  or only equivalent and unreachable items keep it from passing
+  (`only_unreachable`). Next: review what's left. Equivalent survivors and
+  unreachable code may be acceptable as they are, and real gaps need another
+  pass or a person.
 - **`baseline_failed`:** the unit's existing tests were failing before any work
   began. Next: fix the unit's existing state before trying again.
 - **`blocked`:** a seam broke the build and couldn't be fixed within the
@@ -513,8 +544,8 @@ baseline_failed | invalid_input | error
 ## Reason
 
 For any status but `completed`: the reason code, if there is one
-(`combinatorial`, `untestable_dependency`, `uncontrollable_nondeterminism`),
-then the explanation or the relevant output.
+(`combinatorial`, `untestable_dependency`, `uncontrollable_nondeterminism`,
+`round_cap`, `only_unreachable`), then the explanation or the relevant output.
 
 ## Summary
 
@@ -561,6 +592,11 @@ In <test file>:
 ## Suspected bugs
 
 - <test name>: <what the code does, and why it looks wrong>
+
+## Nondeterministic behaviors
+
+- <behavior>: <the two values observed, and any stable properties that could be
+  pinned instead>
 
 ## Check
 

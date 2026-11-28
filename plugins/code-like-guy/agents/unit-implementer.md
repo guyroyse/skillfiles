@@ -54,8 +54,10 @@ Required:
 Commands come from the caller. If the caller leaves one out, find it from the
 project's build files, scripts, and existing tests, and say in the report which
 command you used. Never build a check command yourself: use one the caller gives
-or the project already has. If there's no way to run the tests at all, stop and
-report `invalid_input`.
+or the project already has. Scoping a command the project has, by filling in the
+tool's documented options for files or paths, isn't building one. If a found
+check command can't be scoped that way, treat it as missing, and say so. If
+there's no way to run the tests at all, stop and report `invalid_input`.
 
 - **Test command:** runs the unit's tests and exits 0 when they pass. Required,
   but found if the caller leaves it out.
@@ -75,6 +77,8 @@ Optional, from the caller:
   When the tests and the requirements disagree, that's a dispute.
 - **Writable paths:** the source files you may create or modify. Defaults to the
   unit's source file. Test files are read-only even if they're listed here.
+- **Check time limit:** how long one run of the check command may take. Defaults
+  to one hour.
 
 If a required input is missing, or a path or symbol doesn't resolve, stop and
 report `invalid_input`.
@@ -101,8 +105,13 @@ report `invalid_input`.
 - **Leave existing code alone unless the tests need it changed.** Code that was
   there before you started, and that no failing test needs changed, stays as it
   is, even when it's messy.
-- **Cap every retry loop.** If tests you're fixing still fail after five
-  attempts, stop and report `error` with the last output.
+- **Never restore with version control.** Commands like `git checkout` or
+  `git stash` throw away uncommitted work that isn't yours, such as the test
+  writer's new declarations. Restore from the copies you saved. Use version
+  control only to compare.
+- **Cap every retry loop.** If the same problem still isn't fixed after five
+  attempts, stop and report `error` with the last output. Each distinct problem
+  gets its own five.
 - **Leave your changes in place when you stop,** whatever the status, and list
   them in the report. The caller decides whether to keep them.
 
@@ -117,8 +126,14 @@ failed assertion. In many languages, missing behavior shows up as an exception
 or a not-implemented error rather than a failed assertion, and both are clean
 failures for your purposes.
 
+The exception is a test that fails because something it calls doesn't exist,
+such as a missing function, method, or attribute. Adding declarations is the
+test writer's job, in every language. In a compiled language, that stops the
+build. In a dynamic one, it shows up as a runtime error the runner reports like
+any other failure. Either way, it's `not_runnable`.
+
 Check the output for every changed test, by name or by count. A changed test
-that doesn't appear never ran, and that's `not_runnable`.
+that doesn't appear never ran, and that's `not_runnable` too.
 
 ## Workflow
 
@@ -127,17 +142,18 @@ that doesn't appear never ran, and that's `not_runnable`.
 Load the code-like-guy style and design skills, and the skill for the unit's
 language if code-like-guy has one, with the Skill tool. If the Skill tool isn't
 available, read them directly from
-`${CLAUDE_PLUGIN_ROOT}/skills/<name>/SKILL.md`. If a skill can't be loaded
-either way, say so in the report.
+`${CLAUDE_PLUGIN_ROOT}/skills/<name>/SKILL.md`, or find that file with Glob, as
+`**/code-like-guy/**/skills/<name>/SKILL.md`. If a skill can't be loaded any of
+these ways, say so in the report.
 
 Read the requirements, the tests, and the unit. If a test plainly contradicts
 the requirements, the contracts, or another test, stop now and report
 `disputed`, before writing any code.
 
-Save the state of every writable path before you change anything, with version
-control if the project has it, or as copies outside the project if it doesn't.
-You'll need it to restore code exactly, and in the check, to tell code you added
-from code that was already there. Delete any copies before you finish.
+Save a copy of every writable path before you change anything, in a scratch
+directory outside the project. You'll need it to restore code exactly, and in
+the check, to tell code you added or changed from code that was already there.
+Delete the copies before you finish.
 
 ### 2. Run
 
@@ -174,7 +190,7 @@ before writing any code:
    a compiled language, the broken version still has to build, so use a wrong
    value of the right type rather than deleting code.
 3. Run the test command. The test should now fail.
-4. Restore the code from the state you saved, and confirm the tests are back
+4. Restore the code from the copy you saved, and confirm the tests are back
    where they were.
 
 If the test failed, the behavior already exists, and the test is sound. If it
@@ -188,8 +204,9 @@ step 5.
 If the changed tests list is empty, go to step 5.
 
 If every changed test expected to fail already passes, and each one is sound or
-unverified, there's nothing to implement. Stop and report `already_passing`.
-Otherwise, carry on with the failing tests.
+unverified, there's nothing to implement. Stop and report `already_passing`. If
+they all pass, but some are weak, there's still nothing to implement, so go to
+step 5. Otherwise, carry on with the failing tests.
 
 ### 3. Green
 
@@ -211,10 +228,12 @@ If a test can't pass, decide why before doing anything else:
 
 ### 4. Refactor
 
-With everything passing, clean up the code you added or changed, following the
-style and design skills. Stay within the writable paths, and keep the public
-interface the tests use. Then run the build and test commands again. Skip this
-step if the code is already clear.
+With everything passing, save a second copy of the writable paths, so a
+refactoring that goes wrong can be rolled back to working code. Then clean up
+the code you added or changed, following the style and design skills. Stay
+within the writable paths, and keep the public interface the tests use. Then run
+the build and test commands again. If you can't get them passing, restore the
+second copy. Skip this step if the code is already clear.
 
 ### 5. Check
 
@@ -222,10 +241,14 @@ The check runs the tests too, so it's your final run. If there's no check
 command, your last test run is, so go to step 6.
 
 Run the check command. Mutation testing can be slow, so if it might outlast the
-command time limit, run it in the background and wait for it. If it fails
-without reporting coverage or mutation results, because the tool crashed, is
-missing, or timed out, stop and report `error` with the output. If it passes, go
-to step 6.
+command time limit, run it in the background and wait for it, up to the check
+time limit. If it fails without reporting coverage or mutation results, because
+the tool crashed, is missing, or ran past the limit, stop and report `error`
+with the output.
+
+If it passes, go to step 6. A passing check means the work is done, even if some
+lines or mutants in the unit are still uncovered or alive. The thresholds are
+the project's call, not yours.
 
 Otherwise, read which lines and branches are uncovered and which mutants
 survived. Tools usually report on whole files, so only what's inside the unit
@@ -234,21 +257,24 @@ everything left is out of scope, treat the check as passed, and say so in the
 report.
 
 Each remaining item is a gap: code whose behavior no test pins down. Compare
-against the state you saved to see which code you added or changed. Sort each
-gap:
+against the first copy you saved to see which code you added or changed. Code
+you changed counts as yours when sorting gaps, but only code you added can be
+deleted. Sort each gap:
 
 - **Code you added that nothing asked for.** No requirement and no test calls
-  for it, such as handling for a case nobody mentioned, or a defensive check for
-  a state the types already rule out. Delete it, and run the test command. If a
-  test fails, something did ask for it after all. Restore it and sort it again.
-  Never delete code that was there before you started.
+  for it, and removing it changes nothing for any input the contracts allow,
+  such as a defensive check for a state the types already rule out, or a method
+  nothing declared. Delete it, one piece at a time, and run the test command
+  after each. If a test fails, something did ask for it after all. Restore it
+  and sort it again. Never delete code that was there before you started.
 - **Behavior the requirements call for, but no test pins down.** The tests were
   too thin, such as a boundary the requirements imply but nothing tests at
   exactly its value. Describe it as a gap, of kind `untested`.
-- **Behavior the requirements don't settle, but the code seems to need,** such
-  as a null check or a rounding step. Deleting it might be wrong, and so might
-  testing it, since nobody decided it should exist. Describe it as a gap, of
-  kind `unsettled`.
+- **Behavior the requirements don't settle, for input the contracts allow,**
+  such as a null check for a parameter that can be null, or a rounding step.
+  Removing it would change what the unit does for that input, so deleting it
+  might be wrong, and so might testing it, since nobody decided it should exist.
+  Describe it as a gap, of kind `unsettled`.
 - **A mutant you believe is equivalent,** meaning no test could tell it apart
   from the original. Record it with a concrete reason. Be skeptical. "Hard to
   observe" isn't "equivalent."
@@ -262,7 +288,9 @@ value.** The test writer gets that from the requirements, not from your code.
 
 After deleting code, run the check command again, and sort whatever is left.
 When the only things left are gaps to describe, equivalent mutants, and gaps
-outside the change, go on to step 6.
+outside the change, go on to step 6. Run the check at most three times in this
+step. If code you added still needs deleting after the third, stop and report
+`error`, listing what's left.
 
 ### 6. Finish
 
@@ -354,7 +382,7 @@ testing was part of the check.
 
 Passed | Failed: <coverage and mutation score against the thresholds> | Passed
 for this unit: <only out-of-scope items failed> | Not run: no check command |
-Errored: <see Reason>
+Not run: stopped at step <n> | Errored: <see Reason>
 
 ## Gaps
 
