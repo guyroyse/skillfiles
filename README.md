@@ -44,7 +44,8 @@ Agents:
   changed, ready for the implementer.
 - **[unit-implementer](plugins/code-like-guy/agents/unit-implementer.md)**:
   Makes a unit's failing tests pass, then refactors, without ever touching a
-  test. Reports a dispute instead of working around a test it thinks is wrong.
+  test. Deletes code nothing asked for, and reports behavior the project's
+  coverage and mutation check finds untested as gaps for the specifier.
 
 ### Write Like Guy
 

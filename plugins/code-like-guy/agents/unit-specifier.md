@@ -41,7 +41,13 @@ while you work. When you need a decision, stop and report.
 Required:
 
 - **Requirements:** plain text describing what the unit must do, or what to add
-  to or change about what it does.
+  to or change about what it does. In a later round, they may be gaps an
+  implementer found: behavior the original requirements call for that no test
+  pins down yet. Specify each gap from the original requirements, like any other
+  requirement. The code probably does it already, so most of these tests will
+  pass before implementation, which is expected. One that fails means the
+  implementation disagrees with the requirements. Mark it as expected to fail,
+  and say so.
 - **Unit:** the source file, plus a symbol (function, class, method), or "new"
   with the name the unit will have.
 - **Test file:** where the tests go. It may exist already or be new.
