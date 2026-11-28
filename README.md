@@ -28,9 +28,9 @@ Skills for writing code in my style.
   coding style — naming conventions, module structure, type-system idioms, class
   conventions, and syntactic preferences.
 - **[unit-tests](plugins/code-like-guy/skills/unit-tests)**: How I write unit
-  tests, which I call specs — test the permutations with zero, one, and many,
-  arrange/act/assert, names that read as sentences, test doubles for
-  dependencies, and named constants for test data.
+  tests — test the permutations with zero, one, and many, arrange/act/assert,
+  names that read as sentences, test doubles for dependencies, and named
+  constants for test data.
 
 Agents:
 
@@ -38,9 +38,13 @@ Agents:
   Pins down what an existing unit of code does today with characterization
   tests, looping until the project's coverage and mutation thresholds pass. Says
   so up front when a unit is unsuitable or needs seams approved.
+- **[unit-specifier](plugins/code-like-guy/agents/unit-specifier.md)**: Turns
+  plain-text requirements into tests, with expected values only from the
+  requirements. Reports every judgment call it made, and the tests it added or
+  changed, ready for the implementer.
 - **[unit-implementer](plugins/code-like-guy/agents/unit-implementer.md)**:
-  Makes a unit's failing specs pass, then refactors, without ever touching a
-  spec. Reports a dispute instead of working around a spec it thinks is wrong.
+  Makes a unit's failing tests pass, then refactors, without ever touching a
+  test. Reports a dispute instead of working around a test it thinks is wrong.
 
 ### Write Like Guy
 

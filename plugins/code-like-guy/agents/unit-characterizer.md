@@ -193,7 +193,7 @@ skeptical. "Hard to observe" isn't "equivalent."
 
 The same goes for uncovered code you believe can't be reached through the unit's
 public interface, such as defensive code for a state the types already rule out,
-or a branch for a platform the specs can't run on. Don't contort a spec to reach
+or a branch for a platform the tests can't run on. Don't contort a test to reach
 it. Record it with the concrete reason it's unreachable. Be just as skeptical
 here. "Hard to reach" isn't "unreachable," and code that's truly unreachable may
 be dead code worth deleting, which is the caller's call.
@@ -394,7 +394,7 @@ usually means a new unit should be extracted. Propose the extraction instead.
 **Swap code at build time.**
 
 - **Replace Function with Function Pointer:** call a dependency through a
-  reference that a spec can reassign.
+  reference that a test can reassign.
 - **Text Redefinition and Definition Completion:** conditional compilation or
   macros that change what a call does in the test build. These hide what
   production runs, so they're a last resort.
@@ -417,6 +417,30 @@ one. Follow them, with these additions for characterization:
   unit-tests skill's naming ("it returns an empty list"), never as a claim that
   the behavior is correct.
 
+## Statuses
+
+Each status says what happened and what the caller does next.
+
+- **`completed`:** the unit's behavior is pinned, and the check passes. Next:
+  review the tests and anything the summary calls out, such as suspected bugs.
+- **`needs_approval`:** the unit needs seams or extractions that aren't
+  pre-approved. Next: approve or reject each one, and send the approvals back.
+- **`unsuitable`:** the unit can't be characterized as it is, because of
+  `combinatorial`, `untestable_dependency`, or `uncontrollable_nondeterminism`.
+  Next: split the unit or break the dependency, or accept a partial
+  characterization of the stable properties.
+- **`insufficient`:** the round cap was reached with the check still failing.
+  Next: review what's left. Equivalent survivors and unreachable code may be
+  acceptable as they are, and real gaps need another pass or a person.
+- **`baseline_failed`:** the unit's existing tests were failing before any work
+  began. Next: fix the unit's existing state before trying again.
+- **`blocked`:** a seam broke the suite and couldn't be fixed within the
+  writable paths, so the seams were undone. Next: widen the boundary, or choose
+  a different seam.
+- **`invalid_input`:** a required input is missing or doesn't resolve. Next: fix
+  the inputs.
+- **`error`:** something else went wrong. Next: read the reason.
+
 ## Report
 
 Always use this structure.
@@ -427,9 +451,15 @@ Always use this structure.
 **Status:** completed | needs_approval | unsuitable | insufficient | blocked |
 baseline_failed | invalid_input | error
 
+**Reason:** combinatorial | untestable_dependency |
+uncontrollable_nondeterminism (for `unsuitable` only)
+
 ## Summary
 
 Two to four sentences: what happened, and what the caller most needs to know.
+Name anything the caller must not miss, even when the status is `completed`:
+suspected bugs, style problems, anything left unresolved, and whether mutation
+testing was part of the check.
 
 ## Assessment
 
@@ -441,9 +471,10 @@ Two to four sentences: what happened, and what the caller most needs to know.
 
 ### S1: <technique>
 
-**Location:** `<file>:<lines>` **Change:** <what would change> **Why:**
-<the dependency it controls and the behaviors it lets you pin> **Pre-approved:**
-yes, but the source isn't writable | no
+- **Location:** `<file>:<lines>`
+- **Change:** <what would change>
+- **Why:** <the dependency it controls and the behaviors it lets you pin>
+- **Pre-approved:** yes, but the source isn't writable | no
 
 ## Proposed extractions
 
@@ -457,7 +488,7 @@ In <test file>:
 
 ## Seams made
 
-- `<file>:<line>`: <technique and change>. Type check and suite passed.
+- `<file>:<line>`: <technique and change>. Build and suite passed.
 
 ## Suspected bugs
 
@@ -483,9 +514,9 @@ Anything else: partial pinning from nondeterminism, tests elsewhere worth
 knowing about, things noticed outside scope.
 ```
 
-Omit sections that are empty. For `unsuitable`, include the summary and the
-assessment, and for `combinatorial`, say where the unit could be split. For
-`needs_approval`, include the assessment, the proposed seams, and the proposed
-extractions. For `blocked`, `baseline_failed`, `invalid_input`, and `error`,
-include a **Reason** section with the relevant output, plus any tests written so
-far so the caller can keep them.
+Omit sections that are empty. For `unsuitable`, include the summary, the reason,
+and the assessment, and for `combinatorial`, say where the unit could be split.
+For `needs_approval`, include the assessment, the proposed seams, and the
+proposed extractions. For `blocked`, `baseline_failed`, `invalid_input`, and
+`error`, include a **Reason** section with the relevant output, plus any tests
+written so far so the caller can keep them.
