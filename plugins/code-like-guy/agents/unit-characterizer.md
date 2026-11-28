@@ -77,8 +77,8 @@ report `invalid_input`. Don't go looking for substitutes.
   its own tests is a separate unit waiting to be extracted. Propose the
   extraction. Don't make it public.
 - **Never suppress a mutant or exclude code from coverage.** Disable comments
-  and exclusions hide gaps. Report survivors you believe are equivalent, and let
-  the caller decide.
+  and exclusions hide gaps. Report survivors you believe are equivalent and code
+  you believe is unreachable, and let the caller decide.
 - **The unit's own test file is its safety net.** The check command runs only
   that file. Tests elsewhere that happen to exercise the unit don't count,
   though you may read them for ideas.
@@ -191,9 +191,16 @@ For a survivor you believe is equivalent, meaning no test could tell it apart
 from the original, don't try to kill it. Record it with a concrete reason. Be
 skeptical. "Hard to observe" isn't "equivalent."
 
-Stop after the round cap. If the check still fails, report `insufficient`,
-separating the survivors you believe are equivalent from the gaps you couldn't
-close.
+The same goes for uncovered code you believe can't be reached through the unit's
+public interface, such as defensive code for a state the types already rule out,
+or a branch for a platform the specs can't run on. Don't contort a spec to reach
+it. Record it with the concrete reason it's unreachable. Be just as skeptical
+here. "Hard to reach" isn't "unreachable," and code that's truly unreachable may
+be dead code worth deleting, which is the caller's call.
+
+Stop after the round cap, or sooner if everything left is equivalent or
+unreachable. If the check still fails, report `insufficient`, separating what
+you believe is equivalent or unreachable from the gaps you couldn't close.
 
 ### 6. Finish
 
@@ -464,6 +471,11 @@ Rounds: <n>. Final result: <passed | the coverage and mutation figures>.
 
 - `<file>:<line>`: `<original>` → `<replacement>`. equivalent: <reason> | gap:
   <why it couldn't be pinned>
+
+## Unresolved uncovered code
+
+- `<file>:<lines>`: <what the code does>. unreachable: <reason> | gap: <why it
+  couldn't be reached>
 
 ## Notes
 
