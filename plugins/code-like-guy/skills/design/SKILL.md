@@ -76,6 +76,18 @@ Apply SOLID where practical:
   lazily, on first use rather than at import time, and give tests a way to reset
   them.
 
+## Changing existing code
+
+Keep every change scoped to the work being done. When fixing a bug or adding a
+feature to existing code, especially legacy code, change only what the work
+needs, even when the code around it breaks every rule here. A refactor nobody
+asked for makes the change harder to review, and puts behavior at risk that the
+work never meant to touch.
+
+Restructuring is its own piece of work, done when it's the stated goal, with
+tests in place first. When code needs it, say so, and leave the decision to
+whoever owns the code.
+
 ## Architecture
 
 ### Functional core, imperative shell

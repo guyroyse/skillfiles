@@ -52,6 +52,17 @@ Agents:
   test. Deletes code nothing asked for, and reports behavior the project's
   coverage and mutation check finds untested as gaps for the specifier.
 
+Standalone agents, not part of build-unit:
+
+- **[unit-analyzer](plugins/code-like-guy/agents/unit-analyzer.md)**: Analyzes a
+  unit for potential bugs, confirming each by running it, and for design
+  problems like rule-of-three and SOLID violations. Recommends how it could be
+  split into smaller units. Changes nothing.
+- **[unit-refactorer](plugins/code-like-guy/agents/unit-refactorer.md)**:
+  Restructures a unit toward a stated goal without changing its behavior or the
+  tests, and only as far as the goal asks. Says so up front when the tests are
+  too weak to make the refactor safe.
+
 ### Write Like Guy
 
 Skills for writing in my voice.
