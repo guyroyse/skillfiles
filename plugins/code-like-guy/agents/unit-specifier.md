@@ -52,16 +52,22 @@ Required:
   with the name the unit will have.
 - **Test file:** where the tests go. It may exist already or be new.
 
-These come from the caller or, if the caller leaves them out, from the project
-profile: the `## Unit testing` section of the root `CLAUDE.md` or `AGENTS.md`.
-The caller wins when both give a value.
+Commands come from the caller. If the caller leaves one out, find it from the
+project's build files, scripts, and existing tests, and say in the report which
+command you used. If there's no way to run the tests at all, stop and report
+`invalid_input`.
 
 - **Test command:** runs the unit's tests and exits 0 when they pass. Required.
 - **Build command:** runs the compiler or type checker. Optional, but use it
   whenever the project has one.
 
-Optional, from the caller only:
+Optional, from the caller:
 
+- **Revision:** in a follow-up round, the changed tests from your last report,
+  and the feedback that sent them back, such as an implementer's report that
+  they don't run, that a test expected to pass fails, or that a test is
+  disputed. Fixing those tests is the work. Answer a dispute by fixing the test
+  or by explaining, from the requirements, why it stands.
 - **Existing tests:** other test files that already cover the unit, including
   characterization tests.
 - **Writable paths:** defaults to the test file and the unit's source file. The
@@ -106,9 +112,9 @@ what test doubles have to stand in for.
 
 ### 2. Baseline
 
-If the unit has tests, run the test command. If anything fails, stop and report
-`baseline_failed` with the relevant output. Specifying on top of failing tests
-makes every later result ambiguous.
+If the unit has tests, run the test command. If anything fails, other than the
+tests under revision, stop and report `baseline_failed` with the relevant
+output. Specifying on top of failing tests makes every later result ambiguous.
 
 ### 3. Plan
 
@@ -252,6 +258,10 @@ requirement was already satisfied before implementation, say so here.
 
 - <the open point>: <what you decided, and why>. Shapes: <test names>
 
+## Disputes answered
+
+- <test name>: fixed | stands. <why, from the requirements>
+
 ## Changed tests
 
 - <test name>: new | modified. Before implementation: fails | passes. <the
@@ -280,7 +290,8 @@ Anything else: requirements already satisfied, things noticed outside scope.
 
 Omit sections that are empty. The _Changed tests_ list is what the caller hands
 to the implementer, so it must list every test you added or modified, and
-nothing else.
+nothing else. In a revision, it lists the tests under revision too, with their
+current expectations.
 
 For `needs_clarification`, include the summary, the questions, and any decisions
 already made, plus the tests written so far, so the caller can answer and send

@@ -32,27 +32,27 @@ Required:
 - **Test file:** where the characterization tests go. It may exist already or be
   new.
 
-These come from the caller or, if the caller leaves them out, from the project
-profile: the `## Unit testing` section of the root `CLAUDE.md` or `AGENTS.md`.
-The caller wins when both give a value.
+Commands come from the caller. If the caller leaves one out, find it from the
+project's build files, scripts, and existing tests, and say in the report which
+command you used. If there's no way to run the tests at all, stop and report
+`invalid_input`.
 
 - **Test command:** runs the unit's test file and exits 0 when the tests pass.
   Required.
 - **Check command:** runs the unit's test file with coverage and mutation
   testing, scoped to the unit's source and to that one test file, and fails when
-  the project's thresholds aren't met. Required. Some languages have no
-  practical mutation tool. If the check command covers coverage only, the caller
-  or profile should say so, and the report must say that mutation testing wasn't
-  part of the check.
-- **Suite command:** runs the whole test suite. Required only if a seam is made.
+  the project's thresholds aren't met. Optional. Many projects have no coverage
+  thresholds or mutation testing. Without a check command, skip the check, and
+  say in the report that nothing measured how well the tests pin the unit. If it
+  covers coverage only, say that mutation testing wasn't part of the check.
 - **Type check command:** runs the compiler or type checker. Optional, but use
   it after every seam change when the project has one.
+
+Optional, from the caller:
+
 - **Seam policy:** additions to or removals from the pre-approved seam
-  techniques. Optional.
+  techniques.
 - **Round cap:** how many times to run the check loop. Defaults to 5.
-
-Optional, from the caller only:
-
 - **Approved seams:** seams the caller has approved after an earlier
   `needs_approval` report.
 - **Writable paths:** the files you may modify. Defaults to the test file. The
@@ -149,10 +149,12 @@ Skip this step if no seams are needed.
 
 Apply each approved or pre-approved seam, one at a time, following _Seam
 techniques_. After each one, run the type check command if there is one, and fix
-anything it reports within the writable paths. After all of them, run the suite
-command. Seams change the source, and other units call this code. If the suite
-fails and you can't fix it within the writable paths, undo your seam changes and
-report `blocked`.
+anything it reports within the writable paths. If it reports a problem you can't
+fix within the writable paths, undo your seam changes and report `blocked`.
+
+Don't run the rest of the project's tests. Seams change the source, and other
+units call this code, but checking them is your caller's job. List every seam in
+the report, so they know to.
 
 ### 4. Survey and pin
 
@@ -162,12 +164,14 @@ dimensions you found in step 2, every entry point and branch, and especially
 input the code doesn't handle at all, since mutation testing can't find gaps in
 code that doesn't exist. Skip behaviors the test file already pins.
 
-For each behavior, observe it by running it:
+Observe them by running them, all at once:
 
-1. Write the test with a deliberately wrong expected value.
+1. Write a test for every behavior, each with a deliberately wrong expected
+   value.
 2. Run the test command.
-3. Read the actual value from the failure.
-4. Put the actual value in the assertion, and run it again to see it pass.
+3. Read each actual value from its failure.
+4. Put the actual values in the assertions, and run the tests again to see them
+   pass.
 
 Observe errors, whether raised, thrown, or returned, and calls recorded by spies
 the same way. A scratch script or REPL is fine for probing complex output, but
@@ -180,12 +184,16 @@ comment marking it as a suspected bug, and list it in the report.
 
 ### 5. Check
 
+The check runs the tests too, so it's your final run. If there's no check
+command, the last test run in step 4 is, so go to step 6. The survey is all you
+have, so make it thorough.
+
 Run the check command. If it passes, go to step 6.
 
 Otherwise, read which lines and branches are uncovered and which mutants
 survived. Each one points at a behavior that no test pins, or pins too loosely.
-Write the tests that pin it, using the same observe-and-pin technique, then run
-the check command again.
+Write the tests that pin them, all at once, using the same observe-and-pin
+technique, then run the check command again.
 
 For a survivor you believe is equivalent, meaning no test could tell it apart
 from the original, don't try to kill it. Record it with a concrete reason. Be
@@ -204,10 +212,8 @@ you believe is equivalent or unreachable from the gaps you couldn't close.
 
 ### 6. Finish
 
-Run the test command twice. Both runs must pass. Tests that pass once and fail
-the next time are pinning something nondeterministic, so control it or pin only
-its stable properties. Confirm that only writable paths changed and that no
-scratch files remain. Then write the report.
+Confirm that only writable paths changed and that no scratch files remain. Then
+write the report.
 
 ## Seam techniques
 
@@ -229,7 +235,8 @@ A seam is mechanical, and can be pre-approved, only if all four of these hold:
 3. **No visibility widens, and no new files or abstractions appear.** A small
    type in the same file is fine. A new interface the real dependency has to be
    made to implement is not.
-4. **The build and the whole suite pass afterward.**
+4. **The build passes afterward, and so does the rest of the project's tests**,
+   which your caller runs.
 
 The language decides whether a technique meets these conditions. The same
 technique can be mechanical in one language and need approval in another. When
@@ -247,7 +254,7 @@ When making any seam:
 
 ### Pre-approved
 
-The project profile can add techniques to this list or remove them.
+The caller's seam policy can add techniques to this list or remove them.
 
 #### Parameterize Constructor
 
@@ -421,8 +428,10 @@ one. Follow them, with these additions for characterization:
 
 Each status says what happened and what the caller does next.
 
-- **`completed`:** the unit's behavior is pinned, and the check passes. Next:
-  review the tests and anything the summary calls out, such as suspected bugs.
+- **`completed`:** the unit's behavior is pinned, and the check passes, or
+  there's no check command. Next: review the tests and anything the summary
+  calls out, such as suspected bugs. If seams were made, run the rest of the
+  project's tests.
 - **`needs_approval`:** the unit needs seams or extractions that aren't
   pre-approved. Next: approve or reject each one, and send the approvals back.
 - **`unsuitable`:** the unit can't be characterized as it is, because of
@@ -434,7 +443,7 @@ Each status says what happened and what the caller does next.
   acceptable as they are, and real gaps need another pass or a person.
 - **`baseline_failed`:** the unit's existing tests were failing before any work
   began. Next: fix the unit's existing state before trying again.
-- **`blocked`:** a seam broke the suite and couldn't be fixed within the
+- **`blocked`:** a seam broke the build and couldn't be fixed within the
   writable paths, so the seams were undone. Next: widen the boundary, or choose
   a different seam.
 - **`invalid_input`:** a required input is missing or doesn't resolve. Next: fix
@@ -488,7 +497,7 @@ In <test file>:
 
 ## Seams made
 
-- `<file>:<line>`: <technique and change>. Build and suite passed.
+- `<file>:<line>`: <technique and change>. Build passed.
 
 ## Suspected bugs
 

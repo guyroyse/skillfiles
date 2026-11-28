@@ -49,23 +49,22 @@ Required:
   does nothing in some situation, which a do-nothing body already satisfies.
   Every test not listed is unchanged, and expected to pass.
 
-These come from the caller or, if the caller leaves them out, from the project
-profile: the `## Unit testing` section of the root `CLAUDE.md` or `AGENTS.md`.
-The caller wins when both give a value.
+Commands come from the caller. If the caller leaves one out, find it from the
+project's build files, scripts, and existing tests, and say in the report which
+command you used. If there's no way to run the tests at all, stop and report
+`invalid_input`.
 
 - **Test command:** runs the unit's tests and exits 0 when they pass. Required.
-- **Build command:** runs the compiler or type checker. Optional, but use it
-  after every change when the project has one.
+- **Build command:** runs the compiler or type checker. Optional, but run it
+  before the tests whenever the project has one.
 - **Check command:** runs the unit's tests with coverage and mutation testing,
   scoped to the unit's source and the test files you were given, and fails when
-  the project's thresholds aren't met. Required. Some languages have no
-  practical mutation tool. If the check command covers coverage only, the caller
-  or profile should say so, and the report must say that mutation testing wasn't
-  part of the check.
-- **Suite command:** runs the whole test suite. Required. It's how you find out
-  whether your change broke another unit.
+  the project's thresholds aren't met. Optional. Many projects have no coverage
+  thresholds or mutation testing. Without a check command, skip the check, and
+  say in the report that nothing measured how well the tests pin the unit. If it
+  covers coverage only, say that mutation testing wasn't part of the check.
 
-Optional, from the caller only:
+Optional, from the caller:
 
 - **Requirements:** the requirements the tests came from, along with any
   decisions the test writer made in interpreting them. Read them for context.
@@ -94,7 +93,8 @@ report `invalid_input`.
   contracts make the tests impossible to pass, report `blocked`.
 - **Build what the tests need, and nothing more.** No speculative features, no
   handling for cases nothing asks for, nothing listed as out of scope. Behavior
-  beyond what's specified shows up in the check, and you'll delete it there.
+  beyond what's specified shows up in the check, if there is one, and you'll
+  delete it there.
 - **Never make a test pass by recognizing it.** No special cases for a test's
   particular inputs, and no checks for whether the code is running under test.
 
@@ -148,6 +148,9 @@ passing for the wrong reason: too weak an assertion, a setup that never reaches
 the behavior, or a double that does the work itself. Don't fix it, since tests
 are read-only. List it in the report.
 
+If the changed tests list is empty, because the caller only needs the check run
+again after changing the requirements, go to step 5.
+
 If every changed test expected to fail already passes, there's nothing to
 implement. Stop and report `already_passing`, with what you found for each one.
 Otherwise, carry on with the failing tests, and report the passing ones
@@ -155,15 +158,16 @@ alongside the work.
 
 ### 3. Green
 
-Make the failing tests pass, in small steps. Run the test command after each
-one.
+Implement everything the failing tests ask for, then run the build command, if
+there is one, and the test command. If anything fails, fix it and run them
+again.
 
-A test that was passing and starts failing means your change altered behavior
-nobody asked to change. Fix the implementation, not the test.
+A test that was passing and now fails means your change altered behavior nobody
+asked to change. Fix the implementation, not the test.
 
 If a test can't pass, decide why before doing anything else:
 
-- **The implementation is wrong.** Keep going.
+- **The implementation is wrong.** Fix it, and run again.
 - **The test contradicts the requirements, the contracts, or another test.**
   Stop and report `disputed`. Name the test, quote what it conflicts with, and
   say what you'd expect instead.
@@ -173,11 +177,14 @@ If a test can't pass, decide why before doing anything else:
 ### 4. Refactor
 
 With everything passing, clean up the implementation, following the style and
-design skills. Stay within the writable paths, keep the public interface the
-tests use, and run the test command after each change. Skip this step if the
+design skills. Stay within the writable paths, and keep the public interface the
+tests use. Then run the build and test commands again. Skip this step if the
 code is already clear.
 
 ### 5. Check
+
+The check runs the tests too, so it's your final run. If there's no check
+command, the last test run in step 4 is, so go to step 6.
 
 Run the check command. If it passes, go to step 6.
 
@@ -219,36 +226,29 @@ outside the change, go on to step 6. The status depends on what's left:
 
 ### 6. Finish
 
-1. Run the build command, if there is one.
-2. Run the test command twice. Both runs must pass.
-3. Run the suite command. If tests for any other unit fail, stop and report
-   `broke_dependents`. That's a failure, not a side note, even when the
-   requirements asked for the behavior change that caused it. It usually means
-   the work was done in the wrong order: a unit that depends on this one needed
-   to change first, so that it no longer relies on the old behavior. Don't fix
-   the other unit's tests or code, since they're outside the boundary. Leave
-   your changes in place, so the caller can see what broke and decide what to do
-   with them.
-4. Confirm that only writable paths changed, that no test file changed, and that
-   no scratch files remain.
+Confirm that only writable paths changed, that no test file changed, and that no
+scratch files remain.
+
+Don't run the rest of the project's tests. Other units are outside your
+boundary, and checking that they still pass is your caller's job. Your report's
+list of changes is what tells them what to check.
 
 Then write the report, with the status the check gave, or `completed` if it
-passed. A `broke_dependents` from the suite takes precedence over anything the
-check found.
+passed or there's no check command.
 
 ## Statuses
 
 Each status says what happened and what the caller does next.
 
-- **`completed`:** every test passes, the check passes, and so does the suite.
-  Next: review the work.
-- **`needs_tests`:** every test passes, and so does the suite, but the check
-  found behavior no test pins down. Next: send the `untested` gaps to the test
-  writer as requirements, and the `unsettled` ones to whoever wrote the
-  requirements as questions. Then send the new tests back here.
-- **`insufficient`:** every test passes, and so does the suite, but the check
-  fails only because of mutants believed equivalent. Next: a person reviews
-  them, and accepts or rejects each one.
+- **`completed`:** every test passes, and the check passes or there's no check
+  command. Next: review the work, and run the rest of the project's tests.
+- **`needs_tests`:** every test passes, but the check found behavior no test
+  pins down. Next: send the `untested` gaps to the test writer as requirements,
+  and the `unsettled` ones to whoever wrote the requirements as questions. Then
+  send the new tests back here.
+- **`insufficient`:** every test passes, but the check fails only because of
+  mutants believed equivalent. Next: a person reviews them, and accepts or
+  rejects each one.
 - **`unexpected_gaps`:** the check found gaps in code this change didn't touch.
   The unit didn't meet the thresholds before the work began. Next: characterize
   the unit, then try again.
@@ -264,9 +264,6 @@ Each status says what happened and what the caller does next.
 - **`disputed`:** a test contradicts the requirements, the contracts, or another
   test. Next: send the dispute to the test writer. If it comes back, a person
   decides.
-- **`broke_dependents`:** the unit's tests pass, but another unit's tests now
-  fail. Next: rethink the order of the work. Change the dependent unit first,
-  then come back to this one.
 - **`blocked`:** the change needs something outside the writable paths, or the
   contracts make the tests impossible. Next: widen the boundary, or fix the
   contracts.
@@ -283,7 +280,7 @@ Always use this structure.
 
 **Status:** completed | needs_tests | insufficient | unexpected_gaps |
 already_passing | not_runnable | unexpected_results | baseline_failed | disputed
-| broke_dependents | blocked | invalid_input | error
+| blocked | invalid_input | error
 
 ## Summary
 
@@ -333,10 +330,6 @@ Passed | Failed: <coverage and mutation score against the thresholds>
 - <test name>: <what it asserts, what it conflicts with, what you'd expect
   instead>
 
-## Broken dependents
-
-- <test name, in which file>: <what it expects, and the change that broke it>
-
 ## Notes
 
 Anything else: refactoring done, things noticed outside scope.
@@ -348,7 +341,6 @@ that explain the status. For `not_runnable` and `baseline_failed`, include the
 summary and a **Reason** section with the build or test output. For
 `unexpected_results`, include the summary and the _Unexpected results_ section.
 For `already_passing`, include the summary and the _Already passing_ section.
-For `broke_dependents`, include the summary, the changes, and the _Broken
-dependents_ section. For `blocked`, `invalid_input`, and `error`, include a
-**Reason** section with the relevant output. For `disputed` and `blocked`, also
-list the changes made so far, so the caller can keep or discard them.
+For `blocked`, `invalid_input`, and `error`, include a **Reason** section with
+the relevant output. For `disputed` and `blocked`, also list the changes made so
+far, so the caller can keep or discard them.

@@ -32,6 +32,11 @@ Skills for writing code in my style.
   names that read as sentences, test doubles for dependencies, and named
   constants for test data.
 
+- **[build-unit](plugins/code-like-guy/skills/build-unit)**: Builds or changes
+  one unit test-first by running the agents below in order, looping between
+  specifier and implementer until the project's check passes. Routes every
+  status, and batches the decisions only a person can make.
+
 Agents:
 
 - **[unit-characterizer](plugins/code-like-guy/agents/unit-characterizer.md)**:
