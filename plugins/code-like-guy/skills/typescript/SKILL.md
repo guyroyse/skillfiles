@@ -125,6 +125,9 @@ Details: [references/types-and-classes.md](references/types-and-classes.md)
   to `null`.
 - Throw exceptions and use `try`/`catch`. No `Result`/`Either` types unless the
   codebase already has them.
+- Never use `number` for money. Use the project's money or decimal library if it
+  has one. Otherwise use `bigint`, in the currency's smallest unit, such as
+  cents.
 
 ## Everything else
 

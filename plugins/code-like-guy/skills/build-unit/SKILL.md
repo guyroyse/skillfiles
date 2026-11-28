@@ -105,18 +105,27 @@ scripts, and existing tests, and the instructions in its `CLAUDE.md` or
   for files or paths, is fine. If it can't be scoped that way, treat it as
   missing, rather than checking the whole project on every run.
 
+Pass each command to the agents as the exact command line for this unit, with
+the unit's source and test files filled in, so no agent has to scope one itself.
+
 For an existing unit, run the test command once to make sure it works. Then, for
 any unit, run the suite command, and record which tests already fail. Later,
-only tests that passed here and fail then count against this run.
+only tests that passed here and fail then count against this run. A suite that
+fails only because the project has no tests yet, as in a new project, has an
+empty baseline. That isn't a reason to stop.
 
 Record the starting state, too: the current commit, the files that already have
-uncommitted changes, and a copy of every writable path, in a scratch directory.
-Whenever this skill says to revert, restore from that copy. Never revert with
-version control, such as `git checkout` or `git stash`, which would also throw
-away the user's own uncommitted work.
+uncommitted changes, and a copy of every writable path, in a scratch directory
+outside the project. A writable path that doesn't exist yet, such as the source
+and test files of a new unit, has nothing to copy, so record it as absent.
+Whenever this skill says to revert, restore from that copy, and delete each path
+recorded as absent. Never revert with version control, such as `git checkout` or
+`git stash`, which would also throw away the user's own uncommitted work.
 
 Find the unit's existing tests too: test files other than the test file that
-refer to the unit. They're passed to every agent.
+call the unit directly. They're passed to every agent. Tests of other units that
+only reach this one through their own code are out of scope. If one of them
+breaks, step 5's suite run catches it.
 
 Tell the user which commands you found, and pass them to every agent, so none of
 them has to look again. Don't wait for confirmation. They go in the report
@@ -141,10 +150,12 @@ gaps_. Route its status:
   Revert the seams by restoring the unit's source file from the starting copy,
   which leaves the characterizer's tests in place. Then ask the user whether to
   approve a different seam, which means running the characterizer again, or to
-  stop. If nothing broke, or no seams were made, go on below. If the report
-  lists nondeterministic behaviors, ask the user whether to accept the stable
-  properties it suggests, and if they do, run it again with those as accepted
-  limitations.
+  stop. If nothing broke, or no seams were made, go on below. Carry any
+  suspected bugs it reports into the final report's _Suspected bugs_, so a
+  person sees them. They stay pinned unless the requirements change them. If the
+  report lists nondeterministic behaviors, ask the user whether to accept the
+  stable properties it suggests, and if they do, run it again with those as
+  accepted limitations.
 - **`needs_approval`:** ask the user about each proposed seam and extraction.
   Run the characterizer again, passing each approved seam as its full entry from
   the report. An approved extraction means a new unit that has to be built
@@ -347,6 +358,11 @@ pass, and what the caller most needs to know.
 
 - <the agent and the status it reported, or the step, and why that stops the
   run>
+
+## Suspected bugs
+
+- <test name>: <what the code does, why the characterizer thinks it's wrong, and
+  whether this run changed it>
 
 ## Prerequisite units
 

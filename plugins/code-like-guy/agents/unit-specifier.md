@@ -92,6 +92,11 @@ a unit that's new), stop and report `invalid_input`.
 - **Don't implement.** The only code you write in the source is the minimum that
   lets the tests run, and it must not make them pass. If you find yourself
   making a test pass, stop.
+- **Leave the structure of existing tests alone.** Add new tests alongside them,
+  in new blocks if that reads better, and keep the existing blocks, helpers,
+  constants, and order as they are. If the new tests can't fit without
+  restructuring the existing ones, don't restructure. Ask, with
+  `needs_clarification`, and describe the change you'd make.
 - **Never change an existing body.** You may add declarations for things that
   don't exist yet, and change an existing signature when the requirements change
   it, such as a new parameter, or a result returned instead of thrown. Change
@@ -223,8 +228,15 @@ requirements change. Those tests are about to become wrong, on purpose.
 
 Update each one to assert the new behavior. Remove any characterization marking,
 since it now records intent rather than history. Every update must trace to the
-requirements. List each one as a behavior change, with the old and new expected
-behavior, so whoever reviews the work can see exactly what's changing.
+requirements.
+
+A characterization test may change only when the requirements explicitly change
+the behavior it pins. When a decision of yours would change it, such as reading
+"under $20" to include negative amounts, that's a question, not a decision. It
+records what the code does today, and changing that belongs to a person. Ask,
+with `needs_clarification`. The same goes for removing one. List each one as a
+behavior change, with the old and new expected behavior, so whoever reviews the
+work can see exactly what's changing.
 
 When the requirements change a signature, existing tests that call it the old
 way won't build or run. Update those calls to the new signature, and nothing

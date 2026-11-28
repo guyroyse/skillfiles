@@ -19,8 +19,8 @@ Skills that encode my personal style for note-taking.
 Skills for writing code in my style.
 
 - **[style](plugins/code-like-guy/skills/style)**: How my code reads in any
-  language — the rule of three, naming, comments, and file layout. The language
-  skills build on it.
+  language — the rule of three, naming, comments, file layout, and money. The
+  language skills build on it.
 - **[design](plugins/code-like-guy/skills/design)**: How I fit the pieces
   together — dependency limits, when to abstract, objects versus data
   structures, SOLID, and keeping I/O out of business logic.

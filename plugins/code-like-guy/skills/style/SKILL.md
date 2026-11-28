@@ -108,6 +108,13 @@ if (user.age >= 65 || user.isVeteran) applyDiscount(order)
   function belongs in that function's file. When a file grows large or starts
   serving distinct concerns, split it.
 
+## Money
+
+Never hold money in a binary floating-point type. Values like `0.58` can't be
+represented exactly, so arithmetic on them drifts, and rounding turns the drift
+into wrong cents. Use the language's decimal type, a money library, or integers
+in the currency's smallest unit, such as cents. The language skill says which.
+
 ## IDs
 
 Generate unique IDs as [ULIDs](https://github.com/ulid/spec), not UUIDs. ULIDs
