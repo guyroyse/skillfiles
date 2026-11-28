@@ -38,6 +38,9 @@ Agents:
   Pins down what an existing unit of code does today with characterization
   tests, looping until the project's coverage and mutation thresholds pass. Says
   so up front when a unit is unsuitable or needs seams approved.
+- **[unit-implementer](plugins/code-like-guy/agents/unit-implementer.md)**:
+  Makes a unit's failing specs pass, then refactors, without ever touching a
+  spec. Reports a dispute instead of working around a spec it thinks is wrong.
 
 ### Write Like Guy
 
